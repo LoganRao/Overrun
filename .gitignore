@@ -1,0 +1,9 @@
+.DS_Store
+errors.txt
+log.txt
+traceback.txt
+*.rpyc
+*.rpymc
+cache
+.renpy-sdk
+saves
