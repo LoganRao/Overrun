@@ -51,6 +51,40 @@ label start:
     m "A recon uniform, same as yours. Same insignia & gear. They’re slumped against a wall, unmoving. You kneel beside them, checking for anything useful." 
     m "Their equipment belt holds a {b}rifle{/b} with an empty chamber and a {b}}sidearm{/b} with a single full magazine. You take both. Training, not instinct."
 
+    m "As you search further, you find something tucked beneath their arm:"
+    m "A {b}tablet{/b}, cracked but still functional."
+
+    m "When you power it on, the screen flickers to life. A simple interface appears—clean, minimal, unmistakably military. One option is highlighted."
+
+    # Transition to the tablet screen
+    # Add audio effects
+
+    "Choose an area to explore:"
+    menu:
+        "Alien Town" :
+            jump alien_Town
+        
+        "Frozen Ghost Warehouse" :
+            jump frozen_Ghost_Warehouse
+        
+        "Mutated Forest" :
+            jump mutated_Forest
+
+        "The Last City Ruins" :
+            jump the_Last_City_Ruins
+
+        "Alien Amusement Park" :
+            jump alien_Amusement_Park
+
+
+    label alien_Town:
+    label frozen_Ghost_Warehouse:
+    label mutated_Forest:
+    label the_Last_City_Ruins:
+    label alien_Amusement_Park:
+    label secret_Area:
+
+
     "{b}Bad Ending{/b}."
         
     # This ends the game.
