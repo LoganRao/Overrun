@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Directories that Ren'Py changes files in.
 /game/saves
 /game/cache
@@ -38,6 +39,8 @@ cache
 saves
 
 =======
+=======
+>>>>>>> b8b961f57332dd451792475529014e455136ea02
 .DS_Store
 errors.txt
 log.txt
@@ -47,4 +50,7 @@ traceback.txt
 cache
 .renpy-sdk
 saves
+<<<<<<< HEAD
 >>>>>>> b8b961f (Initial commit)
+=======
+>>>>>>> b8b961f57332dd451792475529014e455136ea02
