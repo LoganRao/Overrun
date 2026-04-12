@@ -7,6 +7,10 @@ define mc = Character(_("Me"), color="#fb2222")
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
 default book = False
 
+# Placeholder image to test how it works
+image bg PlatinumLarge = im.Scale("bg PlatinumLarge.png", 1920, 1080)
+# All background images going forward should be in 1920x1080 resolution.
+
 # The game starts here.
 
 label start:
@@ -17,8 +21,6 @@ label start:
 
     # Start by playing some music.
     play music "audio/On-Lyne  PARTY OF YOUR LIFETIME Instrumental  Technocyte Coda Menu Theme - OliveOil (youtube).mp3"
-
-
     scene bg PlatinumLarge
     with fade
 
@@ -26,7 +28,7 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show me
+    #show me
 
     # These display lines of dialogue.
 
