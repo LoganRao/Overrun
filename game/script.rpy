@@ -88,6 +88,8 @@ label start:
     # ─────────────────────────────────────────
     label alien_Town:
         #Scene changes to the outskirts of the Alien Town.
+        scene bg AlienTown
+        with fade 
         "The tablet's signal leads you to the outskirts of a small settlement—if it can even be called that anymore.
         From a distance, the houses look almost cheerful, painted in bright colors that don't belong on Earth."
 
