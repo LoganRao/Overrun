@@ -16,10 +16,10 @@ label start:
     # images directory to show it.
 
     # Start by playing some music.
-    # play music "illurock.opus"
+    play music "audio/On-Lyne  PARTY OF YOUR LIFETIME Instrumental  Technocyte Coda Menu Theme - OliveOil (youtube).mp3"
 
 
-    scene bg room
+    scene bg PlatinumLarge
     with fade
 
     # This shows a character sprite. A placeholder is used, but you can
@@ -81,7 +81,7 @@ label start:
 
 
     label alien_Town:
-        
+
     label frozen_Ghost_Warehouse:
     label mutated_Forest:
     label the_Last_City_Ruins:
