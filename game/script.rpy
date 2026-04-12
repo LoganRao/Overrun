@@ -3,6 +3,10 @@
 # Declare characters used by this game. The color argument colorizes the name of the character.
 
 define mc = Character(_("Me"), color="#12da00")
+define a7 = Character(_("Alpha-7"), color="#3f99ff")
+define a4 = Character(_("Alpha-4"), color="#263cff")
+define a8 = Character(_("Alpha-8"), color="#263cff")
+define a10 = Character(_("Alpha-10"), color="#263cff")
 define fw = Character(_("Flesh Walker"), color="#ac0404")
 
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
@@ -21,19 +25,19 @@ label start:
     # images directory to show it.
 
     # Start by playing some music.
-    play music "audio/On-Lyne  PARTY OF YOUR LIFETIME Instrumental  Technocyte Coda Menu Theme - OliveOil (youtube).mp3"
+    # play music "audio/On-Lyne  PARTY OF YOUR LIFETIME Instrumental  Technocyte Coda Menu Theme - OliveOil (youtube).mp3"
     scene bg PlatinumLarge
     with fade
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
-    #show me
+    show me
 
     "You wake up with a sharp, pulsing ache across your lower torso. For a moment, you can't breathe. The cold floor presses against your cheek, and your vision swims as you try to remember where you are—or what happened."
 
     "When you manage to roll onto your back, you see the bandages first. A long, horizontal wrap stretches across your lower abdomen, tight and clean. Someone treated the wound. 
-        Someone kept you alive. But you don’t remember who."
+        Someone kept you alive. But you don't remember who."
 
     "The room around you is dim, lit by a few flickering ceiling lights. Dust drifts lazily through the air. As your eyes adjust, you make out the cracked remains of a sign on the far wall:"
 
@@ -162,7 +166,31 @@ label start:
         "Next to it, half-melted into the fleshy floor, is a small recording device."
         "You pry it free."
         "It crackles to life."
-        "You've recovered Alpha-7's log." #Can change how to represent this later.
+        
+        #[BEGIN LOG]
+        a7 "…Alpha-7… recording. I don't know how long I've got. The others… they're gone. Not dead. Just… gone."
+        a7 "…we touched down near the town at dusk. Looked abandoned from a distance. Up close… The walls were warm. Like skin. It felt like the houses were listening to us breathe."
+        a7 "Alpha‑3 ordered recon. Standard sweep. We split up to check the structures. Empty rooms, empty streets… but the air felt thick. Like the whole damn place was holding its breath."
+        #[STATIC — LOW HUM]
+        a7 "…movement in the cornfield. Something tall. Kept pace with us but never stepped into the light. Every time I turned, it froze."
+        a7 "…first contact hit after nightfall. Fast. Invisible. Rounds didn’t slow it. It didn’t even try to kill us—just herded us deeper into the town like cattle."
+        a7 "…Alpha‑5 went into one of the houses. The door slammed behind him. When we forced it open… the room wasn’t the same. Warmer. Breathing. No sign of him."
+        #[AUDIO DISTORTION — ORGANIC SHIFTING]
+        a7 "…that’s when I saw it. The thing in the corn. Flesh‑colored. Limbs like stretched muscle. It moved like it was part of the town… or the town was part of it."
+        a7 "…it tore through the others. I ran. I don’t know where they went. The houses shift when you’re not looking. I swear I can hear them whispering under the floorboards."
+        a7 "…I’m inside now. Walls feel closer. Something’s moving under the floor. I think it knows I’m here."
+        #[WEAPON CHAMBERING]
+        a7 "…if anyone finds this… don’t stay here. Don’t touch the walls. And whatever you do… don’t let the thing in the cornfield see you. Keep moving and get the hell out."
+        #[UNINTELLIGIBLE ORGANIC SHIFTING — WET, LOW RUMBLE]
+        a7 "…it’s at the door…"
+        # [GUNSHOTS — THEN SUDDEN SILENCE]
+        # [VOICE RETURNS — WRONG, MIMICKED, MULTIPLE LAYERS]
+        a7 "…if… you… out there… come… … your friends… are all… here…"
+        a7 "…it’s… a… worse fate… to be hunted… by… me…"
+        # [STATIC — SIGNAL COLLAPSE]
+        # [END LOG]
+
+        #"You've recovered Alpha-7's log." #Can change how to represent this later.
         "As you continue to explore the house, you find subtle signs of Alpha-3's struggle."
 
         # Scene changes to show the backdoor.
@@ -196,8 +224,114 @@ label start:
     #  Frozen Ghost Warehouse
     # ─────────────────────────────────────────
     label frozen_Ghost_Warehouse:
+        #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
         "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
-        
+        "The signals are faint, flickering, as if something is interfering with them."
+
+        "You follow the alleyway until it opens into a wide loading district."
+        "That's when you see it."
+        "A massive warehouse dominates the block, its metal walls coated in a thick layer of frost."
+        "The surrounding pavement is frozen solid, cracked from the sudden temperature drop."
+
+        "It looks like a blizzard hit this one building and nowhere else."
+        "A cold mist rolls across the ground, curling around your boots."
+        "Your breath fogs inside your helmet."
+
+        # "The temperature drops another few degrees." This line feels unecessary
+
+        #Scene changes to reveal the warehouse
+        "The warehouse's main gate is secured with a heavy chain, but the metal is so brittle from the cold that it snaps apart the moment you strike it with your rifle's buttstock."
+        "The gate groans as you push it open." #This could just be audio
+
+        "Halfway through, the hinges crack. The entire gate collapses flat onto the frozen pavement with a metallic crash."
+        "The sound echoes through the empty district." # Could use SFX here too.
+
+        "Nothing answers."
+        "You step inside the perimeter."
+
+        "As you circle the warehouse, you notice something wrong with the loading dock door."
+        "It's partially open—jammed halfway, as if something forced it upward and then stopped."
+        "Frost clings to the edges of the metal, forming jagged crystalline teeth."
+        "You approach slowly."
+        "That's when you see it."
+        "A body is wedged in the gap beneath the sliding door—cut cleanly in half by the weight of the frozen metal."
+        "The torso is slumped outward, armor cracked and covered in frost."
+        "The insignia on the shoulder is unmistakable: {b}ALPHA-4{/b}"
+
+        "His outstretched hand is frozen to the concrete, fingers curled around a small recording device." #Background can transition to reveal the body
+        "You crouch, pry the device from his grip."
+
+        "The moment you press play, the audio crackles to life."
+        "The cold seems to deepen around you."
+        "You listen."
+
+        # [BEGIN LOG]
+        # Alpha‑4 (focused, analytical):
+        a4 "…breaching through the roof. No lights inside. The whole interior’s coated in frost. Human‑shaped figures everywhere… not debris. They look like statues."
+        #Alpha‑8 (uneasy, sarcastic):
+        a8 "Statues? Yeah, right. These things look way too damn real. Give me the chills."
+        #Alpha‑10 (trying to stay calm):
+        a10 "Keep spacing. Don’t touch anything. The temperature's dropping fast."
+
+        # Alpha‑4:
+        a4 "…moving toward the generator. If we get power back, maybe we can see what we’re dealing with. The air's getting colder the deeper we go. Doesn’t feel natural."
+        # Alpha‑8:
+        a8 "Nothing about this place feels natural. It’s like walking into a freezer that hates us."
+        # Alpha‑10:
+        a10 "Generator’s ahead. Let’s just get this done."
+
+        #[STATIC — LIGHTS FLICKER ON]
+        #Alpha‑10 (shouting):
+        a10 "—movement above us!"
+        #Alpha‑8:
+        a8 "Those are NOT statues!"
+
+        #Alpha‑4 (voice low):
+        a4 "…something in the center of the warehouse. Large. Humanoid silhouette. It’s emitting a cold field—everything around it is freezing instantly. It’s just… standing there. Watching us."
+        # Alpha‑8 (whispering):
+        a8 "Why the hell is it just staring? Shouldn’t it be attacking or something?"
+        # Alpha‑10:
+        a10 "Don’t provoke it. Back away—slowly."
+
+        #Alpha‑4:
+        a4 "…frost spreading across the floor like it’s alive. We need to fall back—now."
+        #Alpha‑10:
+        a10 "The door's jammed! Metal’s brittle—trying to force it—"
+        # [METAL STRAINING — CRACKING]
+        # Alpha‑8:
+        a8 "Come on, come on—damn it!"
+
+        #Alpha‑4:
+        a4 "…entity’s advancing. Not fast. Like it’s herding us. Why isn’t it attacking?"
+        #Alpha‑10 (panicking):
+        a10 "Cold’s climbing up my armor… can’t feel my—"
+        #[AUDIO WARBLE — SIGNAL DISTORTION]
+
+        #Alpha‑4 (fading voice):
+        a4 "…don’t turn on the lights… that’s what woke it… it was dormant…"
+        #Alpha‑8 (voice shaking):
+        a8 "We shouldn’t have touched anything… damn it…"
+
+        #Alpha‑10:
+        a10 "…if anyone hears this… the outpost… center of the map…"
+        #Alpha‑4:
+        a4 "…it wasn’t killing us… it was keeping us…"
+        #[UNINTELLIGIBLE WHISPERING — MULTIPLE HUMAN‑LIKE LAYERS]
+        "…here…" # Not sure whose voice this should be.
+        #[END LOG]
+
+        "After going through the log, you suddenly felt a shivering sensation behind you."
+        "Turning around, you see it, what Alpha 4 was mentioning in the audio log."
+
+        #Reveal Ice Boss
+        "You raised your weapon."
+
+        menu:
+            "Fight":
+                jump ice_Boss_Fight
+            "Run to the exit":
+                jump ice_Boss_End
+
     # ─────────────────────────────────────────
     #  Mutated Forest
     # ─────────────────────────────────────────
@@ -257,6 +391,77 @@ label start:
     #     else:
     #         jump death
     
+    label ice_Boss_End:
+        "You turn and sprint for the gate."
+        "Behind you, something moves—fast, wrong, closing the distance in bursts that don’t match reality."
+        "Your boots slam against frozen pavement, slipping for half a step before catching again."
+        "Your HUD screams warnings—temperature collapse, signal distortion, unknown entity proximity—"
+        "You don’t look back. The fallen gate is just ahead. Then—"
+        "A sound. Not a roar. Not a scream. A voice. Layered. Distorted. Familiar."
+
+        a4 "—don’t leave—"
+        "Your stride falters."
+        "You risk a glance over your shoulder."
+        "Mist surges across the yard like a living tide. Inside it, shapes flicker—figures reaching, collapsing, reforming—Running with you."
+        "No—{i}being dragged{/i}."
+
+        "The temperature spikes downward again. Ice crawls up your legs, locking your joints mid-stride." #Maybe accompany with SFX
+        "You stumble, crash hard onto the frozen concrete."
+        "Your rifle skids away, disappearing into the mist."
+        "The gate is only a few feet ahead."
+        "You try to crawl. Your fingers don’t respond."
+
+        "The voice comes again, clearer now. Closer."
+        a4 "—stay—"
+
+        "A shadow falls over you. The mist pulls back just enough for you to see it standing there—taller than before, broader, its surface rippling with frozen silhouettes."
+        "One of them turns toward you."
+        "Alpha-4"
+
+        "His arm lifts slowly, pointing—not at you—but past you."
+        "Back toward the warehouse."
+        "Your HUD flashes one final time." 
+        "{b}SIGNAL ACQUIRED: ALPHA TEAM (ALL){/b}"
+        "The cold consumes everything. Your vision fades to white."
+        "The last thing you feel is movement—Not being attacked. Not being killed. But being pulled."
+        "{b}Back inside{/b}"
+    
+    label ice_Boss_Fight:
+        "You steady your aim."
+        "The thing in the mist shifts—tall, jagged, its form breaking and reforming like ice cracking under pressure. 
+        Frost spreads outward from its limbs, crawling across the ground in branching veins."
+
+        #Ice Beast appears on screen
+        "Your visor flickers."
+        "{b}Temperature warning: critical.{/b}"
+        "You open fire."
+
+        "The shot echoes like a thunderclap in the frozen yard. The round strikes its torso—if it has one—but instead of blood, the impact blossoms into a burst of crystalline shards."
+        "It doesn’t slow. It {i}learns{/i}."
+
+        "The creature lunges forward, movements unnatural, skipping frames like corrupted footage. One moment it stands at the loading dock—the next, it’s halfway to you."
+        "Your rifle chatters, each shot fracturing pieces off it, but those pieces don’t fall. They hover." #I guess have gunshot audio in the background
+        "Then snap back into place."
+
+        "Your HUD glitches harder now—signals spiking, Alpha-team signatures merging, overlapping—Becoming one." #I want to say this could be shown visually, but I doubt Jordan has time for that.
+        "The creature shrieks—a sound like metal screaming under stress—and the temperature plummets again."
+
+        "Your joints stiffen. Your breath stops fogging. You realize—"
+        "It’s not getting colder. You’re freezing."
+        "The creature reaches you."
+        "For a split second, you see through the ice forming across its surface—faces."
+        
+        #Reveal fused faces
+        "Alpha-4"
+        "Alpha-8"
+        "Alpha-10"
+        #"All fused beneath the frozen shell, eyes open, mouths moving silently."
+        "Your weapon locks up. So do your hands."
+        "The last thing your visor records is the entity leaning closer, its surface cracking open—"
+        "{b}Inviting you in.{/b}"
+        jump death
+
+
     label death:
         "{b}You Died{/b}"
         return
