@@ -71,8 +71,8 @@ label start:
         "Alien Town" :
             jump alien_Town
         
-        #"Frozen Ghost Warehouse" :
-            #jump frozen_Ghost_Warehouse
+        "Frozen Ghost Warehouse" :
+            jump frozen_Ghost_Warehouse
         
         #"Mutated Forest" :
             #jump mutated_Forest
@@ -425,6 +425,7 @@ label start:
         "The cold consumes everything. Your vision fades to white."
         "The last thing you feel is movement—Not being attacked. Not being killed. But being pulled."
         "{b}Back inside{/b}"
+        jump death
     
     label ice_Boss_Fight:
         "You steady your aim."
