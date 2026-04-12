@@ -13,7 +13,7 @@ define fw = Character(_("Flesh Walker"), color="#ac0404")
 default book = False
 
 # Placeholder image to test how it works
-image bg PlatinumLarge = im.Scale("bg PlatinumLarge.png", 1920, 1080)
+#image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
 # All background images going forward should be in 1920x1080 resolution.
 
 # The game starts here.
@@ -26,13 +26,13 @@ label start:
 
     # Start by playing some music.
     # play music "audio/On-Lyne  PARTY OF YOUR LIFETIME Instrumental  Technocyte Coda Menu Theme - OliveOil (youtube).mp3"
-    scene bg PlatinumLarge
+    scene bg PoliceDepartment
     with fade
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
-    show me
+    #show me
 
     "You wake up with a sharp, pulsing ache across your lower torso. For a moment, you can't breathe. The cold floor presses against your cheek, and your vision swims as you try to remember where you are—or what happened."
 
