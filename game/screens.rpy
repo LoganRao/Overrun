@@ -1619,3 +1619,118 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+# # ─── LIGHTS ON screen ─────────────────────────────────────────────
+# screen fw_walking():
+#     tag minigame
+
+#     # Your walking background goes here
+#     add "images/street_lights_on.png"
+
+#     # Progress indicator
+#     text "Distance: [fw_distance]" xpos 30 ypos 30 size 22 color "#eee"
+#     text "Health: [fw_health]" xpos 30 ypos 60 size 22 color "#eee"
+
+#     # Advance button (or keypress)
+#     textbutton "Walk forward" action [
+#         SetVariable("fw_distance", fw_distance + 1),
+#         Return("walked")
+#     ] xalign 0.5 yalign 0.9
+
+
+# # ─── LIGHTS OUT screen ────────────────────────────────────────────
+# screen fw_darkness(reaction_window):
+#     tag minigame
+#     modal True   # block all other input
+
+#     add "images/street_lights_off.png"   # dark background / overlay
+
+#     # Flesh Walker visual (optional — could be a sound-only encounter)
+#     add "images/flesh_walker.png" xalign 0.5 yalign 0.3
+
+#     vbox xalign 0.5 yalign 0.75 spacing 16:
+#         text "Something is here…" size 28 color "#ddd" xalign 0.5
+
+#         # Countdown bar
+#         bar value AnimatedValue(reaction_window, reaction_window, 0.0) \
+#             range reaction_window                                         \
+#             xsize 400 ysize 18
+
+#         # The fire button
+#         textbutton "FIRE" action Return("fired") \
+#             xalign 0.5                           \
+#             style "fw_fire_button"
+
+#     # Key binding — space bar also fires
+#     key "K_SPACE" action Return("fired")
+
+#     # Auto-timeout
+#     timer reaction_window action Return("timeout")
+
+# label flesh_walker_minigame:
+#     python:
+#         fw_distance = 0
+#         fw_health   = 3
+#         fw_active   = True
+
+#     # ── Walking loop ──────────────────────────────────────────────
+#     label .walk_loop:
+
+#         # Show walking screen until player steps forward
+#         call screen fw_walking
+#         $ fw_result = _return   # "walked"
+
+#         # After each step, check if lights go out
+#         python:
+#             # Chance of lights going out increases with distance
+#             dark_chance = min(0.9, 0.1 + fw_distance * 0.08)
+#             trigger_dark = random.random() < dark_chance
+
+#         if trigger_dark:
+#             jump flesh_walker_minigame.lights_out
+#         else:
+#             jump flesh_walker_minigame.walk_loop
+
+#     # ── Lights out encounter ──────────────────────────────────────
+#     label .lights_out:
+#         python:
+#             q_file, _ = random.choice(FW_QUESTIONS)
+#             rw = fw_reaction_window()
+
+#         # Play the Flesh Walker audio
+#         play sound (q_file)
+
+#         # Show darkness screen with countdown
+#         call screen fw_darkness(rw)
+#         $ fw_result = _return   # "fired" or "timeout"
+
+#         if fw_result == "fired":
+#             # ── Hit ──
+#             stop sound
+#             play sound "audio/rifle_shot.ogg"
+#             play sound "audio/fw_repelled.ogg"
+#             "The shot rings out. The presence withdraws."
+#             jump flesh_walker_minigame.walk_loop
+#         else:
+#             # ── Miss / timeout ──
+#             stop sound
+#             play sound "audio/fw_attack.ogg"
+#             $ fw_health -= 1
+#             "It got closer."
+
+#             if fw_health <= 0:
+#                 jump flesh_walker_minigame.game_over
+#             else:
+#                 jump flesh_walker_minigame.walk_loop
+
+#     # ── End states ────────────────────────────────────────────────
+#     label .game_over:
+#         $ fw_active = False
+#         "The darkness takes you."
+#         # Return to wherever you call this from
+#         return
+
+#     label .success:
+#         $ fw_active = False
+#         "You reach the light."
+#         return

@@ -28,10 +28,7 @@ label start:
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
-
     #show me
-
-    # These display lines of dialogue.
 
     "You wake up with a sharp, pulsing ache across your lower torso. For a moment, you can't breathe. The cold floor presses against your cheek, and your vision swims as you try to remember where you are—or what happened."
 
@@ -82,7 +79,9 @@ label start:
         #"Alien Amusement Park" :
             #jump alien_Amusement_Park
 
-
+    # ─────────────────────────────────────────
+    #  Alien Town
+    # ─────────────────────────────────────────
     label alien_Town:
         #Scene changes to the outskirts of the Alien Town.
         "The tablet's signal leads you to the outskirts of a small settlement—if it can even be called that anymore.
@@ -186,19 +185,42 @@ label start:
         "Something opened the door as if expecting you to follow it."
         #"Looking out the window, you notice it is going to be night soon as the streetlights light a pathway towards the church which is incredibly well lit." This can just be shown with lighting the in background
         menu:
-            "Stay in the house":
-                jump flesh_Walker_End
+            #"Stay in the house":
+                #jump flesh_Walker_End
             "Make a run for it":
                 jump flesh_Walker_End
             "Go to the Church":
                 jump flesh_Walker_Boss
-
+    
+    # ─────────────────────────────────────────
+    #  Frozen Ghost Warehouse
+    # ─────────────────────────────────────────
     label frozen_Ghost_Warehouse:
+        "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
+        
+    # ─────────────────────────────────────────
+    #  Mutated Forest
+    # ─────────────────────────────────────────
     label mutated_Forest:
+        
+    # ─────────────────────────────────────────
+    #  Last City Ruins
+    # ─────────────────────────────────────────
     label the_Last_City_Ruins:
+
+    # ─────────────────────────────────────────
+    #  Alien Amusement-Park
+    # ─────────────────────────────────────────
     label alien_Amusement_Park:
+
+    # ─────────────────────────────────────────
+    #  Secret Area
+    # ─────────────────────────────────────────
     label secret_Area:
     
+    # ─────────────────────────────────────────
+    #  FLESH WALKER End
+    # ─────────────────────────────────────────
     label flesh_Walker_End:
         #Scene changes to night time cornfield
         "You can hear the creature catching up to you at a rapid speed."
@@ -225,8 +247,16 @@ label start:
         "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
         "You swore was a wall when you barricaded yourself in."
 
-    label flesh_Walker_Boss:
-        
+    # ─────────────────────────────────────────
+    #  FLESH WALKER MINIGAME — minigame.rpy
+    # ─────────────────────────────────────────
+    # label flesh_Walker_Boss:
+    #     call flesh_walker_minigame
+    #     if fw_health > 0:
+    #         "You made it through."
+    #     else:
+    #         jump death
+    
     label death:
         "{b}You Died{/b}"
         return
