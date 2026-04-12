@@ -2,7 +2,7 @@
 
 # Declare characters used by this game. The color argument colorizes the name of the character.
 
-define m = Character(_("Me"), color="#fb2222")
+define mc = Character(_("Me"), color="#fb2222")
 
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
 default book = False
@@ -30,34 +30,37 @@ label start:
 
     # These display lines of dialogue.
 
-    m "You wake up with a sharp, pulsing ache across your lower torso. For a moment, you can’t breathe. The cold floor presses against your cheek, and your vision swims as you try to remember where you are—or what happened."
+    "You wake up with a sharp, pulsing ache across your lower torso. For a moment, you can’t breathe. The cold floor presses against your cheek, and your vision swims as you try to remember where you are—or what happened."
 
-    m "When you manage to roll onto your back, you see the bandages first. A long, horizontal wrap stretches across your lower abdomen, tight and clean. Someone treated the wound. 
+    "When you manage to roll onto your back, you see the bandages first. A long, horizontal wrap stretches across your lower abdomen, tight and clean. Someone treated the wound. 
         Someone kept you alive. But you don’t remember who."
 
-    m "The room around you is dim, lit by a few flickering ceiling lights. Dust drifts lazily through the air. As your eyes adjust, you make out the cracked remains of a sign on the far wall:"
+    "The room around you is dim, lit by a few flickering ceiling lights. Dust drifts lazily through the air. As your eyes adjust, you make out the cracked remains of a sign on the far wall:"
 
-    m "{b}CHARLESWOOD POLICE DEPARTMENT{/b}"
+    mc "{b}CHARLESWOOD POLICE DEPARTMENT{/b}"
 
-    m "Most of the letters are missing or warped, but the meaning is clear enough. This was once a lobby. Now it feels abandoned—quiet in a way that doesn’t feel natural."
+    "Most of the letters are missing or warped, but the meaning is clear enough. This was once a lobby. Now it feels abandoned—quiet in a way that doesn’t feel natural."
 
-    m "You push yourself upright, unsteady. Your uniform is torn, scorched in places. The insignia on your shoulder—{b}Recon Unit{/b}—is still visible, though faded. 
+    "You push yourself upright, unsteady. Your uniform is torn, scorched in places. The insignia on your shoulder—{b}Recon Unit{/b}—is still visible, though faded. 
         You remember the mission. You remember the boss. You remember pain."
     
-    m "Everything after that is blank."
+    "Everything after that is blank."
 
-    m "You stagger forward, scanning the room. A collapsed desk. Scattered papers. A toppled chair. And then—another body."
+    "You stagger forward, scanning the room. A collapsed desk. Scattered papers. A toppled chair. And then—another body."
 
-    m "A recon uniform, same as yours. Same insignia & gear. They’re slumped against a wall, unmoving. You kneel beside them, checking for anything useful." 
-    m "Their equipment belt holds a {b}rifle{/b} with an empty chamber and a {b}}sidearm{/b} with a single full magazine. You take both. Training, not instinct."
+    "A recon uniform, same as yours. Same insignia & gear. They’re slumped against a wall, unmoving. You kneel beside them, checking for anything useful." 
+    "Their equipment belt holds a {b}rifle{/b} with an empty chamber and a {b}}sidearm{/b} with a single full magazine. You take both. Training, not instinct."
 
-    m "As you search further, you find something tucked beneath their arm:"
-    m "A {b}tablet{/b}, cracked but still functional."
+    "As you search further, you find something tucked beneath their arm:"
+    "A {b}tablet{/b}, cracked but still functional."
 
-    m "When you power it on, the screen flickers to life. A simple interface appears—clean, minimal, unmistakably military. One option is highlighted."
+    "When you power it on, the screen flickers to life. A simple interface appears—clean, minimal, unmistakably military. One option is highlighted."
 
     # Transition to the tablet screen
     # Add audio effects
+    
+    # If there is a transition that leads to the pop up to explore other areas that'd be great.
+    # Couldn't find anything like that so I don't know if it even exists.
 
     "Choose an area to explore:"
     menu:
@@ -78,6 +81,7 @@ label start:
 
 
     label alien_Town:
+        
     label frozen_Ghost_Warehouse:
     label mutated_Forest:
     label the_Last_City_Ruins:
@@ -85,7 +89,7 @@ label start:
     label secret_Area:
 
 
-    "{b}Bad Ending{/b}."
+    "{b}The End{/b}."
         
     # This ends the game.
 
