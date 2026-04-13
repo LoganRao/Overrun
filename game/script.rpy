@@ -13,7 +13,8 @@ define fw = Character(_("Flesh Walker"), color="#ac0404")
 default book = False
 
 # Placeholder image to test how it works
-#image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
+image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
+image bg AlienTown = im.Scale("bg AlienTown.png", 1920, 1080)
 # All background images going forward should be in 1920x1080 resolution.
 
 # The game starts here.
@@ -90,6 +91,7 @@ label start:
         #Scene changes to the outskirts of the Alien Town.
         scene bg AlienTown
         with fade 
+
         "The tablet's signal leads you to the outskirts of a small settlement—if it can even be called that anymore.
         From a distance, the houses look almost cheerful, painted in bright colors that don't belong on Earth."
 
@@ -219,8 +221,8 @@ label start:
                 #jump flesh_Walker_End
             "Make a run for it":
                 jump flesh_Walker_End
-            "Go to the Church":
-                jump flesh_Walker_Boss
+            # "Go to the Church":
+            #     jump flesh_Walker_Boss
     
     # ─────────────────────────────────────────
     #  Frozen Ghost Warehouse
@@ -382,6 +384,7 @@ label start:
         fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
         "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
         "You swore was a wall when you barricaded yourself in."
+        jump death
 
     # ─────────────────────────────────────────
     #  FLESH WALKER MINIGAME — minigame.rpy
