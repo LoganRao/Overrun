@@ -11,6 +11,56 @@ define fw = Character(_("Flesh Walker"), color="#ac0404")
 
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
 default book = False
+# Progression tracking
+default areas_cleared = []          # list: "alpha_537", "alpha_4810", "alpha_11", "alpha_12", "alpha_9"
+default escape_endings_count = 0    # int: 0–5 (triggers secret ending unlock at 5)
+
+# Alpha-11 companion state
+default alpha11_companion = False   # bool
+default alpha11_abandoned = False   # bool
+default alpha11_infection_pct = 0   # int: 10, 50, 75, 100
+
+# Player resource flags
+default has_medication = True       # bool: False if player visited Alpha-11 forest area first
+default citrus_file_read = False    # bool: unlocks dialogue in secret ending
+default has_lucky_charm = False     # bool: taken from Alpha-9 body
+
+# Boss outcomes
+default flesh_walker_dead = False
+default frost_beast_dead = False
+default sandworm_dead = False
+default alpha9_dead = False
+default alpha11_infected_dead = False
+default dr_haze_defeated = False
+
+default used_areas = {
+    "alien_town": False,
+    "alien_amusement_park": False,
+    "secret_outpost": False,
+    "frozen_warehouse": False,
+    "city_ruins": False,
+    "mutated_forest": False
+}
+
+# Secret ending stars (one per escape ending completed)
+default star_count = 0              # int: 0–6
+
+# Equipment
+default rifle_ammo = False
+default sidearm_ammo = True
+default grenade = True
+
+# For Alien town area
+default boss_points = 0
+
+# Track used choices
+default used_cover = False
+default used_run = False
+default used_rifle = False
+default used_sidearm = False
+default used_grenade = False
+
+
 
 # Placeholder image to test how it works
 image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
@@ -68,26 +118,53 @@ label start:
     # Couldn't find anything like that so I don't know if it even exists.
 
     "Choose an area to explore:"
-    menu:
-        "Alien Town" :
-            jump alien_Town
-        
-        "Frozen Ghost Warehouse" :
-            jump frozen_Ghost_Warehouse
-        
-        #"Mutated Forest" :
-            #jump mutated_Forest
+    jump area_menu
 
-        #"The Last City Ruins" :
-            #jump the_Last_City_Ruins
+    label area_menu:
+        # prob should have it's own background (or something)
+        scene bg PoliceDepartment
+        with fade
+        menu:
+            # Does not open up others
+            "Explore Alien Town" if not used_areas["alien_town"]:
+                $ used_areas["alien_town"] = True
+                jump alien_town
 
-        #"Alien Amusement Park" :
-            #jump alien_Amusement_Park
+            # Opens up ruins
+            "Explore Mutated Forest" if not used_areas["mutated_forest"]:
+                $ used_areas["mutated_forest"] = True
+                jump mutated_forest            
+
+            # Opens up ruins
+            "Explore Frozen Warehouse" if not used_areas["frozen_warehouse"]:
+                $ used_areas["frozen_warehouse"] = True
+                jump frozen_warehouse
+
+            # Opens up amusement park
+            "Explore City Ruins" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
+                $ used_areas["city_ruins"] = True
+                jump city_ruins
+
+            # Does not open up others   
+            "Explore Alien Amusement Park" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
+                $ used_areas["alien_amusement_park"] = True
+                jump alien_amusement_park
+
+            # Only opens if all others explored
+            "Explore Secret Outpost" if (not used_areas["secret_outpost"] and used_areas["alien_town"] and used_areas["alien_amusement_park"] and used_areas["frozen_warehouse"] and used_areas["city_ruins"] and used_areas["mutated_forest"]):
+                $ used_areas["secret_outpost"] = True
+                jump secret_outpost
+
+
+
+
+
+        return
 
     # ─────────────────────────────────────────
     #  Alien Town
     # ─────────────────────────────────────────
-    label alien_Town:
+    label alien_town:
         #Scene changes to the outskirts of the Alien Town.
         scene bg AlienTown
         with fade 
@@ -216,13 +293,167 @@ label start:
         #Change scene to creepy door
         "Something opened the door as if expecting you to follow it."
         #"Looking out the window, you notice it is going to be night soon as the streetlights light a pathway towards the church which is incredibly well lit." This can just be shown with lighting the in background
+
+        jump round_1
+
+        
+    label round_1:
+        call action_menu
+        jump round_2
+
+    label round_2:
+        call action_menu
+        jump round_3
+
+    label round_3:
+        call action_menu
+        jump end_game
+
+    # -------------------------
+    # ACTION MENU (DYNAMIC)
+    # -------------------------
+
+    label action_menu:
+
         menu:
-            #"Stay in the house":
-                #jump flesh_Walker_End
-            "Make a run for it":
-                jump flesh_Walker_End
-            # "Go to the Church":
-            #     jump flesh_Walker_Boss
+
+            "Look for cover in the house" if not used_cover:
+                $ used_cover = True
+                jump cover_result
+
+            "Make a run for it" if not used_run:
+                $ used_run = True
+                jump run_result
+
+            "Grab rifle and shoot" if not used_rifle:
+                $ used_rifle = True
+                jump rifle_check
+
+            "Grab sidearm and shoot" if not used_sidearm:
+                $ used_sidearm = True
+                jump sidearm_check
+
+            "Throw grenade" if not used_grenade:
+                $ used_grenade = True
+                jump grenade_check
+
+        return
+
+    # -------------------------
+    # COVER
+    # -------------------------
+
+    label cover_result:
+        $ boss_points -= 1
+        "(flavor text) The enemy crushes your hiding spot, you barely jump out unscathed and reevaluate your options"
+        return
+
+    # -------------------------
+    # RUN
+    # -------------------------
+
+    label run_result:
+        $ boss_points += 1
+        "(flavor text) success, you escape the house, and look for a new solution"
+        return
+
+    # -------------------------
+    # RIFLE LOGIC
+    # -------------------------
+
+    label rifle_check:
+        if rifle_ammo:
+            jump rifle_success
+        else:
+            jump rifle_fail
+
+    label rifle_success:
+        $ boss_points += 2
+        $ rifle_ammo = False
+        "(flavor text) you use your rifle and fire at the enemy, dealing great damage to it"
+        return
+
+    label rifle_fail:
+        $ boss_points -= 2
+        "(flavor text) you're rifle has no ammo and the enemy swipes during your confusion, you're still alive but injured."
+        return
+
+    # -------------------------
+    # SIDEARM LOGIC
+    # -------------------------
+
+    label sidearm_check:
+        if sidearm_ammo:
+            jump sidearm_success
+        else:
+            jump sidearm_fail
+
+    label sidearm_success:
+        $ boss_points += 1
+        $ sidearm_ammo = False
+        "(flavor text) you succesfully shoot the enemy, it deals moderate damage, but it's still up and coming toward you"
+        return
+
+    label sidearm_fail:
+        $ boss_points -= 1
+        "(flavor text) gun empty, you jump back in the nick of time but it's nails catch you"
+        return
+
+    # -------------------------
+    # GRENADE LOGIC
+    # -------------------------
+
+    label grenade_check:
+        if grenade:
+            jump grenade_success
+        else:
+            jump grenade_fail
+
+    label grenade_success:
+        $ boss_points += 3
+        $ grenade = False
+        "(flavor text) it does massive damage"
+        return
+
+    label grenade_fail:
+        $ boss_points -= 3
+        "(flavor text) you spend too much time looking for it and get clobbered to the floor, you get up and look for other options"
+        return
+
+    # -------------------------
+    # ENDING
+    # -------------------------
+
+    label end_game:
+
+        if boss_points >= 3:
+            jump good_ending
+        elif boss_points >= 0:
+            jump neutral_ending
+        else:
+            jump bad_ending
+
+    label good_ending:
+        $ star_count += 1
+        "(flavor text) You succeed in beating away the enemy. Go back to the polic hub to recouperate and rethink your options."
+        jump area_menu
+
+    label neutral_ending:
+        "(flavor text) You succesfully get away from the enemy, and go back to the police hub to recouperate"
+        jump area_menu
+
+    label bad_ending:
+        "(flavor text) the enemy catches you and you die"
+
+        "Return to start of area?"
+        menu:
+            "yes":
+                jump alien_town
+            "no":
+                $ used_areas["alien_town"] = False
+                jump area_menu
+
+            
     
     # ─────────────────────────────────────────
     #  Frozen Ghost Warehouse
