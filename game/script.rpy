@@ -131,27 +131,27 @@ label start:
                 jump alien_town
 
             # Opens up ruins
-            "Explore Mutated Forest" if not used_areas["mutated_forest"]:
+            "Explore Mutated Forest (wip)" if not used_areas["mutated_forest"]:
                 $ used_areas["mutated_forest"] = True
                 jump mutated_forest            
 
             # Opens up ruins
-            "Explore Frozen Warehouse" if not used_areas["frozen_warehouse"]:
+            "Explore Frozen Warehouse (wip)" if not used_areas["frozen_warehouse"]:
                 $ used_areas["frozen_warehouse"] = True
                 jump frozen_warehouse
 
             # Opens up amusement park
-            "Explore City Ruins" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
+            "{color=#0000ffff}Explore City Ruins (wip){/color}" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
                 $ used_areas["city_ruins"] = True
                 jump city_ruins
 
             # Does not open up others   
-            "Explore Alien Amusement Park" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
+            "Explore Alien Amusement Park (wip)" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
                 $ used_areas["alien_amusement_park"] = True
                 jump alien_amusement_park
 
-            # Only opens if all others explored
-            "Explore Secret Outpost" if (not used_areas["secret_outpost"] and used_areas["alien_town"] and used_areas["alien_amusement_park"] and used_areas["frozen_warehouse"] and used_areas["city_ruins"] and used_areas["mutated_forest"]):
+            # Open from start, leads to different outcomes
+            "Explore Secret Outpost (wip)" if (not used_areas["secret_outpost"] and used_areas["alien_town"] and used_areas["alien_amusement_park"] and used_areas["frozen_warehouse"] and used_areas["city_ruins"] and used_areas["mutated_forest"]):
                 $ used_areas["secret_outpost"] = True
                 jump secret_outpost
 
@@ -307,7 +307,7 @@ label start:
 
     label round_3:
         call action_menu
-        jump end_game
+        jump at_end_game
 
     # -------------------------
     # ACTION MENU (DYNAMIC)
@@ -424,25 +424,25 @@ label start:
     # ENDING
     # -------------------------
 
-    label end_game:
+    label at_end_game:
 
         if boss_points >= 3:
-            jump good_ending
+            jump at_good_ending
         elif boss_points >= 0:
-            jump neutral_ending
+            jump at_neutral_ending
         else:
-            jump bad_ending
+            jump at_bad_ending
 
-    label good_ending:
+    label at_good_ending:
         $ star_count += 1
         "(flavor text) You succeed in beating away the enemy. Go back to the polic hub to recouperate and rethink your options."
         jump area_menu
 
-    label neutral_ending:
+    label at_neutral_ending:
         "(flavor text) You succesfully get away from the enemy, and go back to the police hub to recouperate"
         jump area_menu
 
-    label bad_ending:
+    label at_bad_ending:
         "(flavor text) the enemy catches you and you die"
 
         "Return to start of area?"
@@ -458,7 +458,7 @@ label start:
     # ─────────────────────────────────────────
     #  Frozen Ghost Warehouse
     # ─────────────────────────────────────────
-    label frozen_Ghost_Warehouse:
+    label frozen_warehouse:
         #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
         "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
         "The signals are faint, flickering, as if something is interfering with them."
@@ -563,34 +563,16 @@ label start:
 
         menu:
             "Fight":
-                jump ice_Boss_Fight
+                jump fw_Fight
             "Run to the exit":
-                jump ice_Boss_End
+                jump fw_End
 
-    # ─────────────────────────────────────────
-    #  Mutated Forest
-    # ─────────────────────────────────────────
-    label mutated_Forest:
-        
-    # ─────────────────────────────────────────
-    #  Last City Ruins
-    # ─────────────────────────────────────────
-    label the_Last_City_Ruins:
-
-    # ─────────────────────────────────────────
-    #  Alien Amusement-Park
-    # ─────────────────────────────────────────
-    label alien_Amusement_Park:
-
-    # ─────────────────────────────────────────
-    #  Secret Area
-    # ─────────────────────────────────────────
-    label secret_Area:
-    
     # ─────────────────────────────────────────
     #  FLESH WALKER End
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)    
     # ─────────────────────────────────────────
     label flesh_Walker_End:
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)        
         #Scene changes to night time cornfield
         "You can hear the creature catching up to you at a rapid speed."
         "You pull out your pistol and put a couple of rounds down into the cornfield behind you to no avail."
@@ -615,7 +597,8 @@ label start:
         fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
         "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
         "You swore was a wall when you barricaded yourself in."
-        jump death
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)
+        jump fw_death
 
     # ─────────────────────────────────────────
     #  FLESH WALKER MINIGAME — minigame.rpy
@@ -627,7 +610,7 @@ label start:
     #     else:
     #         jump death
     
-    label ice_Boss_End:
+    label fw_End:
         "You turn and sprint for the gate."
         "Behind you, something moves—fast, wrong, closing the distance in bursts that don’t match reality."
         "Your boots slam against frozen pavement, slipping for half a step before catching again."
@@ -661,9 +644,9 @@ label start:
         "The cold consumes everything. Your vision fades to white."
         "The last thing you feel is movement—Not being attacked. Not being killed. But being pulled."
         "{b}Back inside{/b}"
-        jump death
+        jump fw_death
     
-    label ice_Boss_Fight:
+    label fw_Fight:
         "You steady your aim."
         "The thing in the mist shifts—tall, jagged, its form breaking and reforming like ice cracking under pressure. 
         Frost spreads outward from its limbs, crawling across the ground in branching veins."
@@ -696,13 +679,62 @@ label start:
         "Your weapon locks up. So do your hands."
         "The last thing your visor records is the entity leaning closer, its surface cracking open—"
         "{b}Inviting you in.{/b}"
-        jump death
+        jump fw_death
 
 
-    label death:
+    label fw_death:
         "{b}You Died{/b}"
-        return
-        
-    # This ends the game.
 
+        "Return to start of area?"
+        menu:
+            "yes":
+                jump frozen_warehouse
+            "no":
+                $ used_areas["frozen_warehouse"] = False
+                jump area_menu                
+
+    # ─────────────────────────────────────────
+    #  Mutated Forest
+    # ─────────────────────────────────────────
+    label mutated_forest:
+        "flavor all the text"
+
+        "Stalker at tower, kill or run"
+
+        "gain star or death?"
+
+        menu:
+            "star":
+                jump mf_star
+            "death":
+                jump mf_death
+
+    label mf_star:
+        $ star_count += 1        
+        jump area_menu
+
+    label mf_death:
+        menu:
+            "Fight":
+                jump ice_Boss_Fight
+            "Run":
+                jump ice_Boss_End       
+        jump area_menu
+
+    # ─────────────────────────────────────────
+    #  Last City Ruins
+    # ─────────────────────────────────────────
+    label city_ruins:
+
+    # ─────────────────────────────────────────
+    #  Alien Amusement-Park
+    # ─────────────────────────────────────────
+    label alien_amusement_park:
+
+    # ─────────────────────────────────────────
+    #  Secret Area
+    # ─────────────────────────────────────────
+    label secret_outpost:
+    
+    # This ends the game.
     return
