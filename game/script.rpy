@@ -65,6 +65,8 @@ default used_grenade = False
 # Placeholder image to test how it works
 image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
 image bg AlienTown = im.Scale("bg AlienTown.png", 1920, 1080)
+image bg Tablet = im.Scale("bg Tablet.png", 1920, 1080)
+image Fleshwalker = im.Scale("Fleshwalker.png", 1920, 1080)
 # All background images going forward should be in 1920x1080 resolution.
 
 # The game starts here.
@@ -122,7 +124,7 @@ label start:
 
     label area_menu:
         # prob should have it's own background (or something)
-        scene bg PoliceDepartment
+        scene bg Tablet
         with fade
         menu:
             # Does not open up others
@@ -302,6 +304,8 @@ label start:
 
         
     label round_1:
+        scene bg AlienTown #later fix
+        show Fleshwalker at right #doesnt work cause resolution is set as full screen
         call action_menu
         jump round_2
 
@@ -457,9 +461,9 @@ label start:
 
         "Return to start of area?"
         menu:
-            "yes":
+            "Yes":
                 jump alien_town
-            "no":
+            "No":
                 $ used_areas["alien_town"] = False
                 jump area_menu
 
