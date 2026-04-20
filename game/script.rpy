@@ -128,32 +128,36 @@ label start:
             # Does not open up others
             "Explore Alien Town" if not used_areas["alien_town"]:
                 $ used_areas["alien_town"] = True
-                jump alien_town
+                jump alien_town  
 
             # Opens up ruins
-            "Explore Mutated Forest (wip)" if not used_areas["mutated_forest"]:
-                $ used_areas["mutated_forest"] = True
-                jump mutated_forest            
-
-            # Opens up ruins
-            "Explore Frozen Warehouse (wip)" if not used_areas["frozen_warehouse"]:
+            "Explore Frozen Warehouse" if not used_areas["frozen_warehouse"]:
                 $ used_areas["frozen_warehouse"] = True
                 jump frozen_warehouse
 
-            # Opens up amusement park
-            "{color=#0000ffff}Explore City Ruins (wip){/color}" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
-                $ used_areas["city_ruins"] = True
-                jump city_ruins
+            # Only used for demo
+            "End of Demo" if (used_areas["frozen_warehouse"] and used_areas["alien_town"]):
+                jump end_of_demo
 
-            # Does not open up others   
-            "Explore Alien Amusement Park (wip)" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
-                $ used_areas["alien_amusement_park"] = True
-                jump alien_amusement_park
+            # # Opens up ruins
+            # "Explore Mutated Forest (wip)" if not used_areas["mutated_forest"]:
+            #     $ used_areas["mutated_forest"] = True
+            #     jump mutated_forest          
 
-            # Open from start, leads to different outcomes
-            "Explore Secret Outpost (wip)" if (not used_areas["secret_outpost"] and used_areas["alien_town"] and used_areas["alien_amusement_park"] and used_areas["frozen_warehouse"] and used_areas["city_ruins"] and used_areas["mutated_forest"]):
-                $ used_areas["secret_outpost"] = True
-                jump secret_outpost
+            # # Opens up amusement park
+            # "{color=#0000ffff}Explore City Ruins (wip){/color}" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
+            #     $ used_areas["city_ruins"] = True
+            #     jump city_ruins
+
+            # # Does not open up others   
+            # "Explore Alien Amusement Park (wip)" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
+            #     $ used_areas["alien_amusement_park"] = True
+            #     jump alien_amusement_park
+
+            # # Open from start, leads to different outcomes
+            # "Explore Secret Outpost (wip)" if (not used_areas["secret_outpost"] and used_areas["alien_town"] and used_areas["alien_amusement_park"] and used_areas["frozen_warehouse"] and used_areas["city_ruins"] and used_areas["mutated_forest"]):
+            #     $ used_areas["secret_outpost"] = True
+            #     jump secret_outpost
 
 
 
@@ -209,7 +213,7 @@ label start:
         "Human...You swallow hard and continue."
 
         # Scene changes and reveals a house
-        # "Up close, the walls pulse faintly, like they’re breathing." -Not sure how pulsing walls are gonna look
+        # "Up close, the walls pulse faintly, like they're breathing." -Not sure how pulsing walls are gonna look
         "Your tracker vibrates once."
         "{b}ALPHA-5 — LAST POSITION: 3m{/b}"
 
@@ -254,20 +258,20 @@ label start:
         a7 "Alpha‑3 ordered recon. Standard sweep. We split up to check the structures. Empty rooms, empty streets… but the air felt thick. Like the whole damn place was holding its breath."
         #[STATIC — LOW HUM]
         a7 "…movement in the cornfield. Something tall. Kept pace with us but never stepped into the light. Every time I turned, it froze."
-        a7 "…first contact hit after nightfall. Fast. Invisible. Rounds didn’t slow it. It didn’t even try to kill us—just herded us deeper into the town like cattle."
-        a7 "…Alpha‑5 went into one of the houses. The door slammed behind him. When we forced it open… the room wasn’t the same. Warmer. Breathing. No sign of him."
+        a7 "…first contact hit after nightfall. Fast. Invisible. Rounds didn't slow it. It didn't even try to kill us—just herded us deeper into the town like cattle."
+        a7 "…Alpha‑5 went into one of the houses. The door slammed behind him. When we forced it open… the room wasn't the same. Warmer. Breathing. No sign of him."
         #[AUDIO DISTORTION — ORGANIC SHIFTING]
-        a7 "…that’s when I saw it. The thing in the corn. Flesh‑colored. Limbs like stretched muscle. It moved like it was part of the town… or the town was part of it."
-        a7 "…it tore through the others. I ran. I don’t know where they went. The houses shift when you’re not looking. I swear I can hear them whispering under the floorboards."
-        a7 "…I’m inside now. Walls feel closer. Something’s moving under the floor. I think it knows I’m here."
+        a7 "…that's when I saw it. The thing in the corn. Flesh‑colored. Limbs like stretched muscle. It moved like it was part of the town… or the town was part of it."
+        a7 "…it tore through the others. I ran. I don't know where they went. The houses shift when you're not looking. I swear I can hear them whispering under the floorboards."
+        a7 "…I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
         #[WEAPON CHAMBERING]
-        a7 "…if anyone finds this… don’t stay here. Don’t touch the walls. And whatever you do… don’t let the thing in the cornfield see you. Keep moving and get the hell out."
+        a7 "…if anyone finds this… don't stay here. Don't touch the walls. And whatever you do… don't let the thing in the cornfield see you. Keep moving and get the hell out."
         #[UNINTELLIGIBLE ORGANIC SHIFTING — WET, LOW RUMBLE]
-        a7 "…it’s at the door…"
+        a7 "…it's at the door…"
         # [GUNSHOTS — THEN SUDDEN SILENCE]
         # [VOICE RETURNS — WRONG, MIMICKED, MULTIPLE LAYERS]
         a7 "…if… you… out there… come… … your friends… are all… here…"
-        a7 "…it’s… a… worse fate… to be hunted… by… me…"
+        a7 "…it's… a… worse fate… to be hunted… by… me…"
         # [STATIC — SIGNAL COLLAPSE]
         # [END LOG]
 
@@ -285,7 +289,7 @@ label start:
         # "The floor near the door is warped, as if something heavy dragged across it." (This could just be visually displayed. Or kept in text.)
         "One section of wall is torn open from the inside. The edges pulse faintly, trying to close."
         # Cut to a new background showing the soldier uniform in the wall
-        "Inside the tear, you see a scrap of fabric—Alpha‑3’s uniform color."
+        "Inside the tear, you see a scrap of fabric—Alpha‑3's uniform color."
         "He tried to escape."
         "He didn't make it."
 
@@ -345,7 +349,7 @@ label start:
 
     label cover_result:
         $ boss_points -= 1
-        "(flavor text) The enemy crushes your hiding spot, you barely jump out unscathed and reevaluate your options"
+        "The enemy crushes your hiding spot, you barely jump out unscathed and reevaluate your options."
         return
 
     # -------------------------
@@ -354,7 +358,7 @@ label start:
 
     label run_result:
         $ boss_points += 1
-        "(flavor text) success, you escape the house, and look for a new solution"
+        "Success, you escape the house, and look for the next step."
         return
 
     # -------------------------
@@ -370,12 +374,12 @@ label start:
     label rifle_success:
         $ boss_points += 2
         $ rifle_ammo = False
-        "(flavor text) you use your rifle and fire at the enemy, dealing great damage to it"
+        "You use your rifle and fire at the enemy, dealing great damage to it"
         return
 
     label rifle_fail:
         $ boss_points -= 2
-        "(flavor text) you're rifle has no ammo and the enemy swipes during your confusion, you're still alive but injured."
+        "Your rifle is out of ammo and the enemy swipes during your confusion, you're still alive but injured."
         return
 
     # -------------------------
@@ -391,12 +395,12 @@ label start:
     label sidearm_success:
         $ boss_points += 1
         $ sidearm_ammo = False
-        "(flavor text) you succesfully shoot the enemy, it deals moderate damage, but it's still up and coming toward you"
+        "You succesfully shoot the enemy, it deals moderate damage, but it's still up and coming toward you"
         return
 
     label sidearm_fail:
         $ boss_points -= 1
-        "(flavor text) gun empty, you jump back in the nick of time but it's nails catch you"
+        "The gun us empty, you jump back in the nick of time but it's nails scratch you"
         return
 
     # -------------------------
@@ -412,12 +416,12 @@ label start:
     label grenade_success:
         $ boss_points += 3
         $ grenade = False
-        "(flavor text) it does massive damage"
+        "You manage to land the hit, it does massive damage."
         return
 
     label grenade_fail:
         $ boss_points -= 3
-        "(flavor text) you spend too much time looking for it and get clobbered to the floor, you get up and look for other options"
+        "You spend too much time looking for it and get clobbered to the floor, you get up and look for other options"
         return
 
     # -------------------------
@@ -435,15 +439,21 @@ label start:
 
     label at_good_ending:
         $ star_count += 1
-        "(flavor text) You succeed in beating away the enemy. Go back to the polic hub to recouperate and rethink your options."
+        "You succeed in beating away the enemy. You decide to go back to the polic hub to recouperate and rethink your options."
         jump area_menu
 
     label at_neutral_ending:
-        "(flavor text) You succesfully get away from the enemy, and go back to the police hub to recouperate"
+        $ star_count += 1
+        "You succesfully get away from the enemy, and go back to the police hub to recouperate"
         jump area_menu
 
     label at_bad_ending:
-        "(flavor text) the enemy catches you and you die"
+        $ used_cover = False
+        $ used_run = False
+        $ used_rifle = False
+        $ used_sidearm = False
+        $ used_grenade = False        
+        "The enemy manages to catch you and {b}you die{/b}"
 
         "Return to start of area?"
         menu:
@@ -459,6 +469,8 @@ label start:
     #  Frozen Ghost Warehouse
     # ─────────────────────────────────────────
     label frozen_warehouse:
+        scene grey
+
         #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
         "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
         "The signals are faint, flickering, as if something is interfering with them."
@@ -502,18 +514,18 @@ label start:
 
         # [BEGIN LOG]
         # Alpha‑4 (focused, analytical):
-        a4 "…breaching through the roof. No lights inside. The whole interior’s coated in frost. Human‑shaped figures everywhere… not debris. They look like statues."
+        a4 "…breaching through the roof. No lights inside. The whole interior's coated in frost. Human‑shaped figures everywhere… not debris. They look like statues."
         #Alpha‑8 (uneasy, sarcastic):
         a8 "Statues? Yeah, right. These things look way too damn real. Give me the chills."
         #Alpha‑10 (trying to stay calm):
-        a10 "Keep spacing. Don’t touch anything. The temperature's dropping fast."
+        a10 "Keep spacing. Don't touch anything. The temperature's dropping fast."
 
         # Alpha‑4:
-        a4 "…moving toward the generator. If we get power back, maybe we can see what we’re dealing with. The air's getting colder the deeper we go. Doesn’t feel natural."
+        a4 "…moving toward the generator. If we get power back, maybe we can see what we're dealing with. The air's getting colder the deeper we go. Doesn't feel natural."
         # Alpha‑8:
-        a8 "Nothing about this place feels natural. It’s like walking into a freezer that hates us."
+        a8 "Nothing about this place feels natural. It's like walking into a freezer that hates us."
         # Alpha‑10:
-        a10 "Generator’s ahead. Let’s just get this done."
+        a10 "Generator's ahead. Let's just get this done."
 
         #[STATIC — LIGHTS FLICKER ON]
         #Alpha‑10 (shouting):
@@ -522,35 +534,35 @@ label start:
         a8 "Those are NOT statues!"
 
         #Alpha‑4 (voice low):
-        a4 "…something in the center of the warehouse. Large. Humanoid silhouette. It’s emitting a cold field—everything around it is freezing instantly. It’s just… standing there. Watching us."
+        a4 "…something in the center of the warehouse. Large. Humanoid silhouette. It's emitting a cold field—everything around it is freezing instantly. It's just… standing there. Watching us."
         # Alpha‑8 (whispering):
-        a8 "Why the hell is it just staring? Shouldn’t it be attacking or something?"
+        a8 "Why the hell is it just staring? Shouldn't it be attacking or something?"
         # Alpha‑10:
-        a10 "Don’t provoke it. Back away—slowly."
+        a10 "Don't provoke it. Back away—slowly."
 
         #Alpha‑4:
-        a4 "…frost spreading across the floor like it’s alive. We need to fall back—now."
+        a4 "…frost spreading across the floor like it's alive. We need to fall back—now."
         #Alpha‑10:
-        a10 "The door's jammed! Metal’s brittle—trying to force it—"
+        a10 "The door's jammed! Metal's brittle—trying to force it—"
         # [METAL STRAINING — CRACKING]
         # Alpha‑8:
         a8 "Come on, come on—damn it!"
 
         #Alpha‑4:
-        a4 "…entity’s advancing. Not fast. Like it’s herding us. Why isn’t it attacking?"
+        a4 "…entity's advancing. Not fast. Like it's herding us. Why isn't it attacking?"
         #Alpha‑10 (panicking):
-        a10 "Cold’s climbing up my armor… can’t feel my—"
+        a10 "Cold's climbing up my armor… can't feel my—"
         #[AUDIO WARBLE — SIGNAL DISTORTION]
 
         #Alpha‑4 (fading voice):
-        a4 "…don’t turn on the lights… that’s what woke it… it was dormant…"
+        a4 "…don't turn on the lights… that's what woke it… it was dormant…"
         #Alpha‑8 (voice shaking):
-        a8 "We shouldn’t have touched anything… damn it…"
+        a8 "We shouldn't have touched anything… damn it…"
 
         #Alpha‑10:
         a10 "…if anyone hears this… the outpost… center of the map…"
         #Alpha‑4:
-        a4 "…it wasn’t killing us… it was keeping us…"
+        a4 "…it wasn't killing us… it was keeping us…"
         #[UNINTELLIGIBLE WHISPERING — MULTIPLE HUMAN‑LIKE LAYERS]
         "…here…" # Not sure whose voice this should be.
         #[END LOG]
@@ -562,63 +574,144 @@ label start:
         "You raised your weapon."
 
         menu:
-            "Fight":
-                jump fw_Fight
-            "Run to the exit":
-                jump fw_End
+            "Stand Your Ground":
+                jump fw_A
+            "Circle and Evade":
+                jump fw_B
+            "Aggressive Push":
+                jump fw_C
+            "Retreat and Reposition":
+                jump fw_D
 
-    # ─────────────────────────────────────────
-    #  FLESH WALKER End
-        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)    
-    # ─────────────────────────────────────────
-    label flesh_Walker_End:
-        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)        
-        #Scene changes to night time cornfield
-        "You can hear the creature catching up to you at a rapid speed."
-        "You pull out your pistol and put a couple of rounds down into the cornfield behind you to no avail."
-        "Continue sprinting, you can feel the exhaustion. You are running out of breath. With no bearings where you are. You slow down and start to listen."
-        # Only breath sounds
+    label fw_A:
+        "You plant your feet. Rifle up. Breath steady."
 
-        "Has the monster moved on? No. It's here."
-        #Footstep audio
-        "You suddenly hear footsteps from {b}behind{/b}."
-        "You turn and fire your rifle, emptying the magazine." #Insert 30 seconds of nonstop full auto until a click sound.
+        "It charges without hesitation."
 
-        mc "Shit!"
-        "You're out of ammo."
+        "You fire controlled bursts."
 
-        "You here it next to you, breathing down your neck and before you can react you can only hear the crunch of your ribs."
+        "Each round bites into the ice plating, carving fractures across its body. Shards explode outward, clattering across frozen concrete. It doesn't slow—but it doesn't adapt either. It's committed to the straight line."
 
-        "You escape into a house and barricade all the doors."
-        "You turn a table over and point your rifle at the only entrance to the house."
-        "You can hear it rounding the house, as if cornering its prey." #Not sure how the audio is going to go
-        "You grip the rifle tight in your hand trying to not recall what had happened to Alpha 7."
-        "Then the rounding sound stopped, and the only sound you can hear is the sound of your own breath." #Play appropriate audio
-        fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
-        "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
-        "You swore was a wall when you barricaded yourself in."
-        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)
-        jump fw_death
+        "It swings."
 
-    # ─────────────────────────────────────────
-    #  FLESH WALKER MINIGAME — minigame.rpy
-    # ─────────────────────────────────────────
-    # label flesh_Walker_Boss:
-    #     call flesh_walker_minigame
-    #     if fw_health > 0:
-    #         "You made it through."
-    #     else:
-    #         jump death
-    
+        "You duck, the frozen blade smashing into a wall behind you and spiderwebbing steel."
+
+        "You keep firing."
+
+        "Closer."
+
+        "Closer."
+        
+        "Then you see it—a faint pulse buried in the center of its chest, buried under layers of ice and flesh."
+
+        "You don't rush. You wait for the rhythm."
+
+        "The shot lands clean."
+
+        "Then You decide to run away"
+        jump fw_good_ending
+
+    label fw_B:
+        "You move instantly."
+
+        "It strikes where you were a second ago, freezing the ground solid on impact."
+
+        "You circle wide, forcing it to turn—slowly at first, then increasingly erratic as it loses traction in the shifting mist."
+
+        "You fire between movement windows. Controlled, disciplined bursts.
+        Cracks spread along its frame."
+
+        "It accelerates—too fast now, overcommitting."
+
+        "It lunges again."
+
+        "You slide under its arc, pivot mid-motion, and fire into its exposed side."
+
+        "The glow beneath the ice flickers."
+
+        "It stumbles—just slightly."
+
+        "That's all you need."
+
+        "A final burst hits the weakened core."
+
+        "The creature halts, rigid."
+
+        "Then You decide to run away"
+        jump fw_good_ending
+
+    label fw_C:
+        "You don't give it space."
+
+        "You rush it."
+
+        "It reacts instantly—wide swing—but you're already inside its reach.
+        Your first shot hits at point-blank range, blasting ice off its torso. Frost climbs your arm interface, warning indicators flashing—but you override the pain feedback."
+
+        "You drive forward."
+
+        "Another shot. Then a strike with your weapon stock, cracking through reinforced ice layers."
+
+        "The creature grabs for you—but its grip is unstable, fragmented.
+        You twist free."
+
+        "The chest glow is fully exposed now."
+
+        "You press in."
+
+        "One final shot at contact range."
+
+        "The core collapses inward."
+
+        "Then You decide to run away"
+        jump fw_good_ending
+
+    label fw_D:
+        "You disengage immediately, falling back toward the dock edge."
+
+        "The creature follows—but it hesitates now, as if learning your pattern too slowly to matter."
+
+        "You use the environment: crates, steel pillars, container stacks. Every angle becomes cover, every gap a firing lane."
+
+        "Each time it emerges from the mist, you punish it with precision shots.
+        Not enough to finish it quickly—but enough to destabilize it.
+        It grows more unstable, its movements stuttering."
+
+        "Then it overextends—smashing through a crate to reach you."
+
+        "That's the opening."
+
+        "Fully exposed in the broken debris field."
+
+        "You steady your rifle."
+
+        "One clean sequence of fire."
+
+        "The core collapses."
+
+        "The creature freezes mid-motion—"
+
+        "Then breaks apart into inert ice fragments across the loading dock floor."
+
+        "Then You decide to run away"
+        jump fw_good_ending
+
+    label fw_good_ending:
+        $ rifle_ammo = True
+        "You run back to the police station to recoup yourself, along the way you find some rifle ammo."
+        jump area_menu
+
+
     label fw_End:
+        #This and fw_Death should be combined for the flavor text of fw_bad_ending
         "You turn and sprint for the gate."
-        "Behind you, something moves—fast, wrong, closing the distance in bursts that don’t match reality."
+        "Behind you, something moves—fast, wrong, closing the distance in bursts that don't match reality."
         "Your boots slam against frozen pavement, slipping for half a step before catching again."
         "Your HUD screams warnings—temperature collapse, signal distortion, unknown entity proximity—"
-        "You don’t look back. The fallen gate is just ahead. Then—"
+        "You don't look back. The fallen gate is just ahead. Then—"
         "A sound. Not a roar. Not a scream. A voice. Layered. Distorted. Familiar."
 
-        a4 "—don’t leave—"
+        a4 "—don't leave—"
         "Your stride falters."
         "You risk a glance over your shoulder."
         "Mist surges across the yard like a living tide. Inside it, shapes flicker—figures reaching, collapsing, reforming—Running with you."
@@ -628,7 +721,7 @@ label start:
         "You stumble, crash hard onto the frozen concrete."
         "Your rifle skids away, disappearing into the mist."
         "The gate is only a few feet ahead."
-        "You try to crawl. Your fingers don’t respond."
+        "You try to crawl. Your fingers don't respond."
 
         "The voice comes again, clearer now. Closer."
         a4 "—stay—"
@@ -657,17 +750,17 @@ label start:
         "You open fire."
 
         "The shot echoes like a thunderclap in the frozen yard. The round strikes its torso—if it has one—but instead of blood, the impact blossoms into a burst of crystalline shards."
-        "It doesn’t slow. It {i}learns{/i}."
+        "It doesn't slow. It {i}learns{/i}."
 
-        "The creature lunges forward, movements unnatural, skipping frames like corrupted footage. One moment it stands at the loading dock—the next, it’s halfway to you."
-        "Your rifle chatters, each shot fracturing pieces off it, but those pieces don’t fall. They hover." #I guess have gunshot audio in the background
+        "The creature lunges forward, movements unnatural, skipping frames like corrupted footage. One moment it stands at the loading dock—the next, it's halfway to you."
+        "Your rifle chatters, each shot fracturing pieces off it, but those pieces don't fall. They hover." #I guess have gunshot audio in the background
         "Then snap back into place."
 
         "Your HUD glitches harder now—signals spiking, Alpha-team signatures merging, overlapping—Becoming one." #I want to say this could be shown visually, but I doubt Jordan has time for that.
         "The creature shrieks—a sound like metal screaming under stress—and the temperature plummets again."
 
         "Your joints stiffen. Your breath stops fogging. You realize—"
-        "It’s not getting colder. You’re freezing."
+        "It's not getting colder. You're freezing."
         "The creature reaches you."
         "For a split second, you see through the ice forming across its surface—faces."
         
@@ -693,6 +786,50 @@ label start:
                 $ used_areas["frozen_warehouse"] = False
                 jump area_menu                
 
+
+    # ─────────────────────────────────────────
+    #  FLESH WALKER End
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)    
+    # ─────────────────────────────────────────
+    label aleintown_End:
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)        
+        #Scene changes to night time cornfield
+        "You can hear the creature catching up to you at a rapid speed."
+        "You pull out your pistol and put a couple of rounds down into the cornfield behind you to no avail."
+        "Continue sprinting, you can feel the exhaustion. You are running out of breath. With no bearings where you are. You slow down and start to listen."
+        # Only breath sounds
+
+        "Has the monster moved on? No. It's here."
+        #Footstep audio
+        "You suddenly hear footsteps from {b}behind{/b}."
+        "You turn and fire your rifle, emptying the magazine." #Insert 30 seconds of nonstop full auto until a click sound.
+
+        mc "Shit!"
+        "You're out of ammo."
+
+        "You here it next to you, breathing down your neck and before you can react you can only hear the crunch of your ribs."
+
+        "You escape into a house and barricade all the doors."
+        "You turn a table over and point your rifle at the only entrance to the house."
+        "You can hear it rounding the house, as if cornering its prey." #Not sure how the audio is going to go
+        "You grip the rifle tight in your hand trying to not recall what had happened to Alpha 7."
+        "Then the rounding sound stopped, and the only sound you can hear is the sound of your own breath." #Play appropriate audio
+        fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
+        "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
+        "You swore was a wall when you barricaded yourself in."
+        # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)
+        jump at_bad_ending
+
+    # ─────────────────────────────────────────
+    #  FLESH WALKER MINIGAME — minigame.rpy
+    # ─────────────────────────────────────────
+    # label flesh_Walker_Boss:
+    #     call flesh_walker_minigame
+    #     if fw_health > 0:
+    #         "You made it through."
+    #     else:
+    #         jump death
+    
     # ─────────────────────────────────────────
     #  Mutated Forest
     # ─────────────────────────────────────────
@@ -714,12 +851,15 @@ label start:
         jump area_menu
 
     label mf_death:
+        "{b}You Died{/b}"
+
+        "Return to start of area?"
         menu:
-            "Fight":
-                jump ice_Boss_Fight
-            "Run":
-                jump ice_Boss_End       
-        jump area_menu
+            "yes":
+                jump mutated_forest
+            "no":
+                $ used_areas["mutated_forest"] = False
+                jump area_menu  
 
     # ─────────────────────────────────────────
     #  Last City Ruins
@@ -738,3 +878,6 @@ label start:
     
     # This ends the game.
     return
+
+    label end_of_demo:
+        "{b}THANK YOU FOR PLAYING{/b}"
