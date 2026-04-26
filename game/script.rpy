@@ -7,6 +7,7 @@ define a7 = Character(_("Alpha-7"), color="#3f99ff")
 define a4 = Character(_("Alpha-4"), color="#263cff")
 define a8 = Character(_("Alpha-8"), color="#263cff")
 define a10 = Character(_("Alpha-10"), color="#263cff")
+define a11 = Character(_("Alpha-11"), color="#263cff")
 define fw = Character(_("Flesh Walker"), color="#ac0404")
 
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
@@ -15,6 +16,7 @@ default book = False
 # Placeholder image to test how it works
 image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
 image bg AlienTown = im.Scale("bg AlienTown.png", 1920, 1080)
+image bg FrozenWarehouse = im.Scale("bg FrozenWarehouse.png", 1920, 1080)
 # All background images going forward should be in 1920x1080 resolution.
 
 # The game starts here.
@@ -78,11 +80,11 @@ label start:
         #"Mutated Forest" :
             #jump mutated_Forest
 
-        #"The Last City Ruins" :
-            #jump the_Last_City_Ruins
+        "The Last City Ruins" :
+            jump the_Last_City_Ruins
 
-        #"Alien Amusement Park" :
-            #jump alien_Amusement_Park
+        "Alien Amusement Park" :
+            jump alien_Amusement_Park
 
     # ─────────────────────────────────────────
     #  Alien Town
@@ -229,6 +231,9 @@ label start:
     # ─────────────────────────────────────────
     label frozen_Ghost_Warehouse:
         #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
+        scene bg FrozenWarehouse
+        with fade 
+
         "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
         "The signals are faint, flickering, as if something is interfering with them."
 
@@ -345,6 +350,115 @@ label start:
     #  Last City Ruins
     # ─────────────────────────────────────────
     label the_Last_City_Ruins:
+        "The city ruins stretch out before you like a sun‑bleached graveyard."
+        "Heat ripples across the cracked asphalt. Sand drifts in slow waves between collapsed skyscrapers. The air tastes metallic, dry, and dead."
+        "Your visor pings."
+        "A {b}red marker{/b} blinks on your HUD — Alpha‑12’s last known location."
+        "But something is wrong. The marker is {b}moving{/b}."
+        "Slowly. Steadily. Directly toward you."
+        "You frown behind your visor."
+        "Alpha‑12 shouldn’t be moving. Not like this. Not this fast."
+        "The marker accelerates. You take a step back. The ground vibrates beneath your boots."
+        "A low, resonant rumble rolls through the ruins — deep enough to shake dust from the broken windows above."
+        "Your HUD flickers. The marker surges forward."
+        "Too fast. Far too fast to be human."
+        "A cold realization hits you."
+
+        mc "... That’s not Alpha‑12."
+        "The sand ahead bulges upward. Cracks spiderweb across the street. Metal groans beneath shifting earth."
+        "The rumble grows louder. Closer"
+        "The red marker blinks violently — then disappears."
+        "The ground {b}erupts.{/b}"
+        "A massive Sandworm bursts through the street in an explosion of sand, concrete, and shattered rebar."
+        "Its armored hide glistens in the sun. Its maw opens wide, lined with spiraling rings of teeth."
+        "The shockwave knocks you backward."
+        "You scramble to your feet as the worm slams back into the ground, tunneling beneath the ruins."
+        "The street collapses behind you as you sprint."
+
+        "Every few seconds, the earth bulges — a warning before the creature bursts upward again, jaws snapping shut where you stood moments before."
+        "Heat. Dust. Screams of twisting metal."
+        "The city becomes a collapsing maze."
+        "You dive behind a toppled bus as the worm erupts again, sand pouring through shattered windows like a waterfall."
+
+        "You're breathing hard. Your legs burn. Your visor is fogged with sweat."
+        "The worm circles back. The ground trembles violently. You brace yourself—"
+        "A hand grabs your shoulder from behind."
+        "Before you can react, someone yanks you backward, dragging you through a narrow hatch in the side of an abandoned tank."
+
+        #Scene should be whatever tank interior we're in.
+        "{i}The hatch slams shut above you. Sand pours down the sides of the tank like a collapsing dune.{/i}"
+        "{i}Alpha‑11 drops in after you, breathing hard, dust streaking his cracked visor. He braces himself against the wall, listening to the rumbling outside.{/i}"
+        
+        #Sprite of Alpha-11 would be here normally
+        a11 "…You okay? That thing nearly swallowed you whole. I had to shove you in here before it surfaced again."
+        a11 "…Yeah. That’s a Sandworm. A big one in fact, It’s been circling this district since I got here."
+        a11 "…You were tracking Alpha‑12, right? Did you see him? Did you find him?"
+        a11 "…I lost him when the ground gave out. One second he was right behind me, the next… the sand swallowed half the street."
+        a11 "…I tried to reach him. I swear I did. But the worm was already circling back. I had to run."
+        a11 "…Please. Tell me you saw him. Anything. A signal. A trail. Did he make it out?"
+        a11 "…What about the others? Alpha‑4? Alpha‑8? Alpha‑10? Anyone from the other teams?"
+        a11 "…Are any of them still alive?"
+
+        menu:
+            "No":
+                jump cont_Last_City_Ruins
+            "I don't know":
+                jump cont_Last_City_Ruins
+        
+
+    label cont_Last_City_Ruins:
+        "The silence that follows is heavy. Alpha 11 exhales, steadying himself."
+        a11 "Alpha‑12 found me after I escaped the forest."
+        a11 "He kept me moving. Got me through the heat, the sand, the ruins. I owe him for that."
+        a11 "But this city… It's a graveyard. Collapsed towers, cracked streets, skeletons everywhere. And under all that? That monster."
+        a11 "Alpha‑12 pushed me out of the way when the ground buckled. Told me to run. I thought he was right behind me."
+        a11 "But when I turned around...he was gone."
+
+        a11 "So tell me again. You didn’t see him? No sign at all?"
+        a11 "I need to know if he’s still out there."
+        "The tank shakes as the Sandworm tunnels deeper beneath the ruins. Alpha‑11 grips the hatch wheel."
+        a11 "When that thing moves on, we’re heading east. That’s where the exit should be. If Alpha‑12 made it out, that’s where he’d go."
+        a11 "We’ll keep looking. Until we know for sure."
+        a11 "Get ready. We move as soon as it’s clear."
+
+        "The rumbling outside fades into the distance. Only then does Alpha‑11 release his grip on the hatch wheel."
+        a11 "Alright. It’s moving on. You go first."
+        #Scene changes back to what it originally was
+        "You climb out of the tank and scan the ruins — sun‑bleached streets, leaning skyscrapers, dunes swallowing entire vehicles."
+        "Your visor pings softly."
+        "{b}Alpha‑12’s tracker signal is still active.{/b}" 
+        "Still moving. Still attached to the Sandworm’s body."
+        "Alpha‑12 is gone. The worm is wearing his beacon like a trophy."
+        "You swallow hard. Alpha‑11 doesn’t know."
+
+        mc "Clear!"
+        "Alpha‑11 tries to climb out on his own."
+        "He gets one foot onto the ladder — and immediately winces, doubling over as pain rips through his abdomen."
+        "He grips the rung with one hand, the other pressed against his stomach."
+        a11 "I’ll go first."
+        a11 "I can make it to the pharmacy. I’ll find Alpha‑12 on the way."
+        "He tries again. His leg buckles."
+        "He slips."
+
+        "You grab his arm before he falls back into the tank"
+        mc "Stop. You're hurt."
+        a11 "I have to go"
+        a11 "If Alpha‑12 is out there, he’ll head for the pharmacy. I need to—"
+
+        "Alpha-11 tries to pull away from you, but his strength fails."
+        "He collapses onto the tank’s hull, one hand clamped over his wound."
+        mc "Let me see."
+        "The bandage is soaked through. The wound beneath is swollen, darkened, pulsing faintly with infection."
+        a11 "It’s spreading faster than I thought."
+        a11 "Which way? Where’s the pharmacy from here?"
+        "Alpha-11 looks out over the ruins, voice quieter now."
+        a11 "Tell me the direction. I’ll go. Just point me there."
+
+        "He doesn’t know the truth."
+        "That Alpha-12 is already dead."
+        "That his tracker is on the Sandworm."
+        
+
 
     # ─────────────────────────────────────────
     #  Alien Amusement-Park
