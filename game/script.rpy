@@ -860,11 +860,6 @@ label start:
                 jump area_menu  
 
     # ─────────────────────────────────────────
-    #  Last City Ruins
-    # ─────────────────────────────────────────
-    label city_ruins:
-
-    # ─────────────────────────────────────────
     #  Alien Amusement-Park
     # ─────────────────────────────────────────
     label alien_amusement_park:
@@ -895,6 +890,8 @@ label start:
         "Guess there is no other choice. You entered the building."
         "After entering the building, there are 4 doors present in front of you."
         "Then, suddenly, a black shadow figure appeared from your body. The shadow slowly walked towards the first door and made a gesture, opening the door and facing through the door."
+
+
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
