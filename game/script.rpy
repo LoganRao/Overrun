@@ -9,6 +9,7 @@ define a8 = Character(_("Alpha-8"), color="#263cff")
 define a10 = Character(_("Alpha-10"), color="#263cff")
 define a11 = Character(_("Alpha-11"), color="#263cff")
 define fw = Character(_("Flesh Walker"), color="#ac0404")
+define lg = Character(_("Little Girl"), color="#b33348")
 
 # This is a variable that is True if you've compared a VN to a book, and False otherwise.
 default book = False
@@ -73,6 +74,9 @@ image Tablet = im.Scale("bg Tablet-2.png", 1920, 1080)
 image Fleshwalker = im.Scale("Fleshwalker-2.png", 1920, 1080)
 image Ice-Wolf = im.Scale("icewolf.png", 1920, 1080)
 image Sand-Worm = im.Scale("sandworm.png", 1920, 1080)
+image Door1_Sign = im.Scale("door_1_sign.png", 1920, 1080)
+image Door2_Sign = im.Scale("door_2_sign.png", 1920, 1080)
+image Door3_Sign = im.Scale("door_3_sign.png", 1920, 1080)
 
 # The game starts here.
 
@@ -899,7 +903,84 @@ label start:
             "Door 4":
                 jump door_4
 
+    label door_1:
+        "You hear a young girl's laughter coming in from deeper inside the park, and hear her calling out to you."
+        "Hey! Young Traveler wants to play a game with me? Let's play..."
+        "Hide and Seek!"
+        "You will be seeking! And I will be hiding! Make sure to count to 10!"
+        "You see a marked symbol on a nearby broken-down booth:"
+        show Door1_Sign
 
+        "After entering the area, the door immediately shut behind you. Looking around, you see darkness, except there is a door directly in front of you with a single fluorescent light shining down that is flickering randomly. "
+        "You step forward."
+        "Before hearing what sounds like a little girl whispering into your ear."
+
+        lg "Hey, you want to play a game with me?"
+
+        "You immediately turn to check, flashing your flashlight into the area. But nothing."
+        "You hear it again."
+
+        lg "What should we play today? Hmm?"
+
+        "It came from a different direction this time. You try to search with your flashlight, but there's nothing. Just some cargo boxes spread across the room."
+
+        lg "“I know, let's play hide and seek!"
+
+        "It came from behind you again. You turned around and saw nothing again."
+        lg "Let's see. I know! How about you come and find me!"
+
+        menu:
+            "Find the girl":
+                jump seeker
+            "Run for the door":
+                jump runner
+        
+        label seeker:
+            "You searched from the top to the bottom of the area; however, you were unable to find the girl. "
+            lg "Whoa, you are really bad at this! Hmm…I'm bored, guess you'll just have to die now."
+        label runner:
+            "You slowly traversed through the surroundings and are slowly moving towards the door."
+            "Suddenly, something knocked the flashlight out of your hand. You scrambled to find the flashlight."
+            "Hey! No running away!"
+    
+    label door_2:
+        "Entering through the door, darkness."
+        "You open the flashlight by your side and see what seemed to be corridors but every surface is made out of an object that has physics similar to mirrors."
+        "Turning around the door that you have entered is long gone."
+        "Before seeing a symbol marked by a sharp nearby."
+        show Door2_Sign
+
+        "After opening the door, you immediately fell through the door. And before you know it, you land hard on something hard and cold."
+        "You slowly got up and opened your flashlight to see mirrors on the walls, on the ground, and even on the ceilings."
+        "You can see an infinite amount of yourself within this area."
+        "You slowly walked around before unknowingly bumping into one of the mirrors that you thought was not there. You continue walking around, and once in a while, the same occurs."
+        "Then you stopped when you heard something. It is very quiet."
+        "A gas leak, you point your flashlight down and see white gas was slowly filling up at the bottom of your feet."
+        "Time is running out."
+
+    label door_3:
+        "Entering the new area, you see darkness before and light suddenly lit up around you."
+        "A prison yard."
+        "However you see {b}people{/b} surrounding you, or at least whatever the environment thinks what a person is."
+        "However you see “people” surrounding you, or at least whatever the environment thinks what a person is."
+        "Taking a step into the area you felt a crunch sound, looking down you see a poster."
+        show Door3_Sign
+
+        "You wake up."
+        "Looking around, it seems to be a forest."
+        "Then, unintentionally, you grabbed something."
+        "A hunter's rifle."
+        "You checked the magazine for ammunition. There are only three bullets."
+        "Looking around, you see only wildlife, deer, and birds chiming in the distance."
+        "Not sure what you are supposed to do, you searched around."
+        "Then a thumping sound can be heard, and the area becomes dark."
+        "That's when you see it, a pair of red eyes in the distance of the forest staring right into your soul."
+        "You quickly take aim at it; however, the area thumps again, and the eyes are nowhere to be seen."
+    label door_4:
+
+       
+        
+    
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
