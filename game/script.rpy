@@ -804,7 +804,7 @@ label start:
                 jump cont_Last_City_Ruins
             "I don't know":
                 jump cont_Last_City_Ruins
-                
+
     label cont_Last_City_Ruins:
         "The silence that follows is heavy. Alpha 11 exhales, steadying himself."
         a11 "Alpha‑12 found me after I escaped the forest."
@@ -886,9 +886,13 @@ label start:
         "Walking around the building proved to be useless, as somehow you always manage to route back to the entrance of that building."
         "Guess there is no other choice. You entered the building."
         "After entering the building, there are 4 doors present in front of you."
-        "Then, suddenly, a black shadow figure appeared from your body. The shadow slowly walked towards the first door and made a gesture, opening the door and facing through the door."
+        "Then, suddenly, a black shadow figure appeared from your body. The shadow slowly walked towards the {b}first{/b} door and made a gesture, opening the door and facing through the door."
 
-
+        menu:
+            "Door 1"
+            "Door 2"
+            "Door 3"
+            "Door 4"
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
