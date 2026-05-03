@@ -889,10 +889,16 @@ label start:
         "Then, suddenly, a black shadow figure appeared from your body. The shadow slowly walked towards the {b}first{/b} door and made a gesture, opening the door and facing through the door."
 
         menu:
-            "Door 1"
-            "Door 2"
-            "Door 3"
-            "Door 4"
+            "Door 1":
+                jump door_1
+            "Door 2":
+                jump door_2
+            "Door 3":
+                jump door_3
+            "Door 4":
+                jump door_4
+
+        
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
