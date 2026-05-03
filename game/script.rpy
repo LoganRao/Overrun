@@ -17,23 +17,23 @@ default book = False
 default areas_cleared = []          # list: "alpha_537", "alpha_4810", "alpha_11", "alpha_12", "alpha_9"
 default escape_endings_count = 0    # int: 0–5 (triggers secret ending unlock at 5)
 
-# Alpha-11 companion state
-default alpha11_companion = False   # bool
-default alpha11_abandoned = False   # bool
-default alpha11_infection_pct = 0   # int: 10, 50, 75, 100
+# # Alpha-11 companion state
+# default alpha11_companion = False   # bool
+# default alpha11_abandoned = False   # bool
+# default alpha11_infection_pct = 0   # int: 10, 50, 75, 100
 
-# Player resource flags
-default has_medication = True       # bool: False if player visited Alpha-11 forest area first
-default citrus_file_read = False    # bool: unlocks dialogue in secret ending
-default has_lucky_charm = False     # bool: taken from Alpha-9 body
+# # Player resource flags
+# default has_medication = True       # bool: False if player visited Alpha-11 forest area first
+# default citrus_file_read = False    # bool: unlocks dialogue in secret ending
+# default has_lucky_charm = False     # bool: taken from Alpha-9 body
 
-# Boss outcomes
-default flesh_walker_dead = False
-default frost_beast_dead = False
-default sandworm_dead = False
-default alpha9_dead = False
-default alpha11_infected_dead = False
-default dr_haze_defeated = False
+# # Boss outcomes
+# default flesh_walker_dead = False
+# default frost_beast_dead = False
+# default sandworm_dead = False
+# default alpha9_dead = False
+# default alpha11_infected_dead = False
+# default dr_haze_defeated = False
 
 default used_areas = {
     "alien_town": False,
@@ -62,21 +62,20 @@ default used_rifle = False
 default used_sidearm = False
 default used_grenade = False
 
-
-
 # Placeholder image to test how it works
 image bg PoliceDepartment = im.Scale("bg PoliceDepartment.png", 1920, 1080)
 image bg AlienTown = im.Scale("bg AlienTown.png", 1920, 1080)
 image bg FrozenWarehouse = im.Scale("bg FrozenWarehouse.png", 1920, 1080)
+image bg cityRuins = im.Scale("city_ruins.png", 1920, 1080)
 # All background images going forward should be in 1920x1080 resolution.
 
 image Tablet = im.Scale("bg Tablet-2.png", 1920, 1080)
 image Fleshwalker = im.Scale("Fleshwalker-2.png", 1920, 1080)
 image FrozenBeast = im.Scale("frozen_beast.png", 1920, 1080)
 image Sand-Worm = im.Scale("sandworm.png", 1920, 1080)
-image Door1_Sign = im.Scale("door_1_sign.png", 1920, 1080)
-image Door2_Sign = im.Scale("door_2_sign.png", 1920, 1080)
-image Door3_Sign = im.Scale("door_3_sign.png", 1920, 1080)
+image Door1_Sign = im.Scale("door_1_sign.png", 500, 600)
+image Door2_Sign = im.Scale("door_2_sign.png", 500, 600)
+image Door3_Sign = im.Scale("door_3_sign.png", 500, 600)
 
 # The game starts here.
 
@@ -124,17 +123,7 @@ label start:
     # Couldn't find anything like that so I don't know if it even exists.
 
     "Choose an area to explore:"
-    jump area_menu
-
-        "The Last City Ruins" :
-            jump the_Last_City_Ruins
-
-        "Alien Amusement Park" :
-            jump alien_Amusement_Park
     label area_menu:
-        # prob should have it's own background (or something)
-        scene bg AlienTown
-        show Fleshwalker at right 
         scene bg PoliceDepartment
         show Tablet at center
         # with fade
@@ -150,7 +139,7 @@ label start:
                 jump frozen_warehouse
 
             # Only used for demo
-            "{b}End of Demo{/b}" if (used_areas["frozen_warehouse"] and used_areas["alien_town"]):
+            "{b}End of Game{/b}" if (used_areas["frozen_warehouse"] and used_areas["alien_town"] and used_areas["city_ruins"]):
                 jump end_of_demo
 
             # # Opens up ruins
@@ -158,13 +147,13 @@ label start:
             #     $ used_areas["mutated_forest"] = True
             #     jump mutated_forest          
 
-            # # Opens up amusement park
-            # "{color=#0000ffff}Explore City Ruins (wip){/color}" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
-            #     $ used_areas["city_ruins"] = True
-            #     jump city_ruins
-
+            # Opens up amusement park
+            "{color=#0000ffff}Explore City Ruins{/color}" if (not used_areas["city_ruins"] and (used_areas["mutated_forest"] or used_areas["frozen_warehouse"])):
+                $ used_areas["city_ruins"] = True
+                jump city_ruins
+                
             # # Does not open up others   
-            # "Explore Alien Amusement Park (wip)" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
+            # "{color=#ac0404}Explore Alien Amusement Park{/color}" if (not used_areas["alien_amusement_park"] and used_areas["city_ruins"]):
             #     $ used_areas["alien_amusement_park"] = True
             #     jump alien_amusement_park
 
@@ -182,7 +171,6 @@ label start:
             #                     jump area_menu
             #         "No":
             #             jump area_menu
-
         return
 
     # ─────────────────────────────────────────
@@ -208,8 +196,8 @@ label start:
         "The corn towers over you—far taller than it should be.
         The stalks are a soft, rubbery texture. Not like plants. More like skin."
 
-        "Your tracker pings again."
-        "{b}ALPHA-5 — LAST POSITION: 42m{/b}"
+        "Your tracker pings again.
+        {b}ALPHA-5 — LAST POSITION: 42m{/b}"
         "You keep moving."
 
         # Tightening cornfield path. Really feels like this should be a new scene but idk.
@@ -218,12 +206,12 @@ label start:
 
         # Scene changes and reveals a house
         # "Up close, the walls pulse faintly, like they're breathing." -Not sure how pulsing walls are gonna look
-        "Your tracker vibrates."
-        "{b}ALPHA-5 — LAST POSITION: 3m{/b}"
+        "Your tracker vibrates.
+        {b}ALPHA-5 — LAST POSITION: 3m{/b}"
 
         mc "This is the place."
         # Scene changes to the inside of the house I guess?
-        "You step inside."
+        # "You step inside."
 
         #Scene change again:
         "The room is empty—except for a single boot lying in the center of the floor. The floor beneath it bulges upward in a human-shaped outline, frozen mid-struggle."
@@ -253,7 +241,7 @@ label start:
         
     label round_1:
         scene bg AlienTown
-        show Fleshwalker at right 
+        show Fleshwalker
         call action_menu from _call_action_menu
         jump round_2
 
@@ -420,15 +408,9 @@ label start:
     # ─────────────────────────────────────────
     #  Frozen Ghost Warehouse
     # ─────────────────────────────────────────
-    label frozen_Ghost_Warehouse:
-        #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
+    label frozen_warehouse:
         scene bg FrozenWarehouse
         with fade 
-
-        "Your tablet lights up with multiple overlapping pings—{b}3 Alpha-team signatures{/b} clustered in the same location."
-        "The signals are faint, flickering, as if something is interfering with them."
-    label frozen_warehouse:
-        scene grey
 
         #Scene change to I think a town? We'll later change to the warehouse itself, but before that, not sure what it's supposed to be.
         "Your tablet lights up with multiple overlapping pings—clustered in the same location."
@@ -591,134 +573,6 @@ label start:
                 $ used_areas["frozen_warehouse"] = False
                 jump area_menu
 
-
-    # label fw_End:
-    #     #This and fw_Death should be combined for the flavor text of fw_bad_ending
-    #     "You turn and sprint for the gate."
-    #     "Behind you, something moves—fast, wrong, closing the distance in bursts that don't match reality."
-    #     "Your boots slam against frozen pavement, slipping for half a step before catching again."
-    #     "Your HUD screams warnings—temperature collapse, signal distortion, unknown entity proximity—"
-    #     "You don't look back. The fallen gate is just ahead. Then—"
-    #     "A sound. Not a roar. Not a scream. A voice. Layered. Distorted. Familiar."
-
-    #     a4 "—don't leave—"
-    #     "Your stride falters."
-    #     "You risk a glance over your shoulder."
-    #     "Mist surges across the yard like a living tide. Inside it, shapes flicker—figures reaching, collapsing, reforming—Running with you."
-    #     "No—{i}being dragged{/i}."
-
-    #     "The temperature spikes downward again. Ice crawls up your legs, locking your joints mid-stride." #Maybe accompany with SFX
-    #     "You stumble, crash hard onto the frozen concrete."
-    #     "Your rifle skids away, disappearing into the mist."
-    #     "The gate is only a few feet ahead."
-    #     "You try to crawl. Your fingers don't respond."
-
-    #     "The voice comes again, clearer now. Closer."
-    #     a4 "—stay—"
-
-    #     "A shadow falls over you. The mist pulls back just enough for you to see it standing there—taller than before, broader, its surface rippling with frozen silhouettes."
-    #     "One of them turns toward you."
-    #     "Alpha-4"
-
-    #     "His arm lifts slowly, pointing—not at you—but past you."
-    #     "Back toward the warehouse."
-    #     "Your HUD flashes one final time." 
-    #     "{b}SIGNAL ACQUIRED: ALPHA TEAM (ALL){/b}"
-    #     "The cold consumes everything. Your vision fades to white."
-    #     "The last thing you feel is movement—Not being attacked. Not being killed. But being pulled."
-    #     "{b}Back inside{/b}"
-    #     jump fw_death
-    
-    # label fw_Fight:
-    #     "You steady your aim."
-    #     "The thing in the mist shifts—tall, jagged, its form breaking and reforming like ice cracking under pressure. 
-    #     Frost spreads outward from its limbs, crawling across the ground in branching veins."
-
-    #     #Ice Beast appears on screen
-    #     "Your visor flickers."
-    #     "{b}Temperature warning: critical.{/b}"
-    #     "You open fire."
-
-    #     "The shot echoes like a thunderclap in the frozen yard. The round strikes its torso—if it has one—but instead of blood, the impact blossoms into a burst of crystalline shards."
-    #     "It doesn't slow. It {i}learns{/i}."
-
-    #     "The creature lunges forward, movements unnatural, skipping frames like corrupted footage. One moment it stands at the loading dock—the next, it's halfway to you."
-    #     "Your rifle chatters, each shot fracturing pieces off it, but those pieces don't fall. They hover." #I guess have gunshot audio in the background
-    #     "Then snap back into place."
-
-    #     "Your HUD glitches harder now—signals spiking, Alpha-team signatures merging, overlapping—Becoming one." #I want to say this could be shown visually, but I doubt Jordan has time for that.
-    #     "The creature shrieks—a sound like metal screaming under stress—and the temperature plummets again."
-
-    #     "Your joints stiffen. Your breath stops fogging. You realize—"
-    #     "It's not getting colder. You're freezing."
-    #     "The creature reaches you."
-    #     "For a split second, you see through the ice forming across its surface—faces."
-        
-    #     #Reveal fused faces
-    #     "Alpha-4"
-    #     "Alpha-8"
-    #     "Alpha-10"
-    #     #"All fused beneath the frozen shell, eyes open, mouths moving silently."
-    #     "Your weapon locks up. So do your hands."
-    #     "The last thing your visor records is the entity leaning closer, its surface cracking open—"
-    #     "{b}Inviting you in.{/b}"
-    #     jump fw_death
-
-
-    # label fw_death:
-    #     "{b}You Died{/b}"
-
-    #     "Return to start of area?"
-    #     menu:
-    #         "yes":
-    #             jump frozen_warehouse
-    #         "no":
-    #             $ used_areas["frozen_warehouse"] = False
-    #             jump area_menu                
-
-
-    # # ─────────────────────────────────────────
-    # #  FLESH WALKER End
-    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)    
-    # # ─────────────────────────────────────────
-    # label aleintown_End:
-    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)        
-    #     #Scene changes to night time cornfield
-    #     "You can hear the creature catching up to you at a rapid speed."
-    #     "You pull out your pistol and put a couple of rounds down into the cornfield behind you to no avail."
-    #     "Continue sprinting, you can feel the exhaustion. You are running out of breath. With no bearings where you are. You slow down and start to listen."
-    #     # Only breath sounds
-
-    #     "Has the monster moved on? No. It's here."
-    #     #Footstep audio
-    #     "You suddenly hear footsteps from {b}behind{/b}."
-    #     "You turn and fire your rifle, emptying the magazine." #Insert 30 seconds of nonstop full auto until a click sound.
-
-    #     mc "Shit!"
-    #     "You're out of ammo."
-
-    #     "You here it next to you, breathing down your neck and before you can react you can only hear the crunch of your ribs."
-
-    #     "You escape into a house and barricade all the doors."
-    #     "You turn a table over and point your rifle at the only entrance to the house."
-    #     "You can hear it rounding the house, as if cornering its prey." #Not sure how the audio is going to go
-    #     "You grip the rifle tight in your hand trying to not recall what had happened to Alpha 7."
-    #     "Then the rounding sound stopped, and the only sound you can hear is the sound of your own breath." #Play appropriate audio
-    #     fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
-    #     "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
-    #     "You swore was a wall when you barricaded yourself in."
-    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)
-    #     jump at_bad_ending
-
-    # ─────────────────────────────────────────
-    #  FLESH WALKER MINIGAME — minigame.rpy
-    # ─────────────────────────────────────────
-    # label flesh_Walker_Boss:
-    #     call flesh_walker_minigame
-    #     if fw_health > 0:
-    #         "You made it through."
-    #     else:
-    #         jump death
     
     # ─────────────────────────────────────────
     #  Mutated Forest
@@ -754,24 +608,16 @@ label start:
     # ─────────────────────────────────────────
     #  Last City Ruins
     # ─────────────────────────────────────────
-    label the_Last_City_Ruins:
+    label city_ruins:
+        scene bg cityRuins
         "The city ruins stretch out before you like a sun‑bleached graveyard."
-        "Heat ripples across the cracked asphalt. Sand drifts in slow waves between collapsed skyscrapers. The air tastes metallic, dry, and dead."
-        "Your visor pings."
         "A {b}red marker{/b} blinks on your HUD — Alpha‑12’s last known location."
-        "But something is wrong. The marker is {b}moving{/b}."
-        "Slowly. Steadily. Directly toward you."
-        "You frown behind your visor."
-        "Alpha‑12 shouldn’t be moving. Not like this. Not this fast."
+        "But something is wrong. The marker is {b}moving{/b}. Slowly. Steadily. Directly toward you."
         "The marker accelerates. You take a step back. The ground vibrates beneath your boots."
-        "A low, resonant rumble rolls through the ruins — deep enough to shake dust from the broken windows above."
-        "Your HUD flickers. The marker surges forward."
-        "Too fast. Far too fast to be human."
-        "A cold realization hits you."
+        "Your HUD flickers. The marker surges forward fast. Too fast. Far too fast to be human."
 
         mc "... That’s not Alpha‑12."
         "The sand ahead bulges upward. Cracks spiderweb across the street. Metal groans beneath shifting earth."
-        "The rumble grows louder. Closer"
         "The red marker blinks violently — then disappears."
         "The ground {b}erupts.{/b}"
         
@@ -789,14 +635,108 @@ label start:
         "You dive behind a toppled bus as the worm erupts again, sand pouring through shattered windows like a waterfall."
 
         "You're breathing hard. Your legs burn. Your visor is fogged with sweat."
-        "The worm circles back. The ground trembles violently. You brace yourself—"
-        "A hand grabs your shoulder from behind."
+        "The worm circles back. The ground trembles violently. You look for an opening, and see a sign."
+        jump direction_1
+
+    label direction_1:
+        hide Sand-Worm
+        show Door1_Sign at center
+        menu:
+            "Go East":
+                jump east_1
+            "Go West":
+                jump east_1
+                # jump west_1
+            "Go North":
+                jump north_1
+            "Go South":
+                jump south_1   
+
+    label east_1:
+        hide Door1_Sign
+        show Door2_Sign at center
+        "You run left, skirting around ruble and debris."
+
+        "The Sandworm follows you quickly in pursuit, but lags behind."
+
+        "You see another sign ahead"
+        menu:
+            "Go East":
+                jump west_2
+            "Go West":
+                jump west_2
+            "Go North":
+                jump east_2
+            "Go South":
+                jump east_2        
+
+    label north_1:
+        hide Door1_Sign
+        show Sand-Worm
+        "You run North, trying to escape the rumbling."
+        "But when you look down to your tablet again, you see yourself on a collision course with Alpha-12's tracker"
+        "The Sandworm bursts out infront of you"
+        "You duck out of the way, but it's huge jaw catches you."
+        "You have no choice but to lie in agony as the Sandworm comes back in for a second swoop, finishing the job off."
+        jump ruins_bad
+
+    label south_1:
+        hide Door1_Sign
+        show Door3_Sign at center
+        "You run away from the rumbling, with all the might you have left in your body."
+        "The Sandworm chases, and it's catching up."
+        "You see another sign ahead"
+        menu:
+            "Go East":
+                jump east_2
+            "Go West":
+                jump west_2
+            "Go North":
+                jump west_2
+            "Go South":
+                jump east_2
+
+    label east_2:
+        hide Door2_Sign
+        hide Door3_Sign
+        show Sand-Worm
+        "You climb over a fallen building, praying that the Sandworm will be unable to break through."
+        "Your prays come unanswered as the ruins start falling apart right underneath you."
+        "You fall. Straight into the maw of the Sandworm."
+        jump ruins_bad
+    label west_2:
+        hide Door2_Sign
+        hide Door3_Sign
+        show Sand-Worm
+        "You try to juke around buildings and stay on flat ground."
+        "You don't even understand what driving force is even left in your body."
+        "But it pushes you onwards anyways."
+        "You don't even remember how long you've been running for, yet you keep pushing onwards."
+        "You catch a rock and trip, eyes unable to see past the sweat dripping down your face. Ears unable to hear anything. You look down at the tablet."
+        "The red tracker, it's nowhere to be seen. The rumbling of the ground, you don't feel it anymore."
+        hide Sand-Worm
+        "You've successfully ran away from it."
+        "After spending a long time recouperating, you slowly walk back to the police station, following the trackers you know belong to dead soldiers on the tablet."
+        jump area_menu
+
+
+    label ruins_bad:
+        "Try again?"
+        menu:
+            "Yes":
+                jump direction_1
+            "No":
+                $ used_areas["city_ruins"] = False
+                jump area_menu
+
         "Before you can react, someone yanks you backward, dragging you through a narrow hatch in the side of an abandoned tank."
 
         #Scene should be whatever tank interior we're in.
         "{i}The hatch slams shut above you. Sand pours down the sides of the tank like a collapsing dune.{/i}"
         "{i}Alpha‑11 drops in after you, breathing hard, dust streaking his cracked visor. He braces himself against the wall, listening to the rumbling outside.{/i}"
         
+        hide Sand-Worm
+
         #Sprite of Alpha-11 would be here normally
         a11 "…You okay? That thing nearly swallowed you whole. I had to shove you in here before it surfaced again."
         a11 "…Yeah. That’s a Sandworm. A big one in fact, It’s been circling this district since I got here."
@@ -809,11 +749,11 @@ label start:
 
         menu:
             "No":
-                jump cont_Last_City_Ruins
+                jump cont_city_ruins
             "I don't know":
-                jump cont_Last_City_Ruins
+                jump cont_city_ruins
 
-    label cont_Last_City_Ruins:
+    label cont_city_ruins:
         "The silence that follows is heavy. Alpha 11 exhales, steadying himself."
         a11 "Alpha‑12 found me after I escaped the forest."
         a11 "He kept me moving. Got me through the heat, the sand, the ruins. I owe him for that."
@@ -864,10 +804,15 @@ label start:
         "He doesn’t know the truth."
         "That Alpha-12 is already dead."
         "That his tracker is on the Sandworm."
+
+        jump area_menu
+
     # ─────────────────────────────────────────
     #  Alien Amusement-Park
     # ─────────────────────────────────────────
     label alien_amusement_park:
+        scene bg cityRuins
+
         "As you walk down the urban area, the last location of Alpha 9’s tracker flickers on your tablet. "
         "Suddenly, the weather changed dramatically; it seemed a hurricane was crashing down upon this side of the city. Every step you take forward feels more difficult than the last, until you eventually lose balance and are picked up into the air. "
         "Within the hurricane, you struggle to keep your balance while trying to make sure nothing is lost, until you see a light centered in the eye of the hurricane."
@@ -875,6 +820,9 @@ label start:
         "However, something suddenly breaks, and you are launched into the eye of the hurricane."
 
         "As you wake up with a gasp, you study the surroundings around you, and what was in front surprised you to the core."
+
+        scene bg aPark
+
         mc "Is that an...amusement park?"
 
         "You stand up, pad yourself down, and slowly walked closer to the entrance. "
@@ -909,9 +857,9 @@ label start:
 
     label door_1:
         "You hear a young girl's laughter coming in from deeper inside the park, and hear her calling out to you."
-        "Hey! Young Traveler wants to play a game with me? Let's play..."
-        "Hide and Seek!"
-        "You will be seeking! And I will be hiding! Make sure to count to 10!"
+        lg "Hey! Young Traveler wants to play a game with me? Let's play..."
+        lg "Hide and Seek!"
+        lg "You will be seeking! And I will be hiding! Make sure to count to 10!"
         "You see a marked symbol on a nearby broken-down booth:"
         show Door1_Sign
 
@@ -942,6 +890,7 @@ label start:
         label seeker:
             "You searched from the top to the bottom of the area; however, you were unable to find the girl. "
             lg "Whoa, you are really bad at this! Hmm…I'm bored, guess you'll just have to die now."
+            jump apark_bad
         label runner:
             "You slowly traversed through the surroundings and are slowly moving towards the door."
             "Suddenly, something knocked the flashlight out of your hand. You scrambled to find the flashlight."
@@ -962,6 +911,7 @@ label start:
         "Then you stopped when you heard something. It is very quiet."
         "A gas leak, you point your flashlight down and see white gas was slowly filling up at the bottom of your feet."
         "Time is running out."
+        jump apark_bad
 
     label door_3:
         "Entering the new area, you see darkness before and light suddenly lit up around you."
@@ -971,16 +921,16 @@ label start:
         "Taking a step into the area you felt a crunch sound, looking down you see a poster."
         show Door3_Sign
 
-        "You wake up."
-        "Looking around, it seems to be a forest."
-        "Then, unintentionally, you grabbed something."
-        "A hunter's rifle."
-        "You checked the magazine for ammunition. There are only three bullets."
-        "Looking around, you see only wildlife, deer, and birds chiming in the distance."
-        "Not sure what you are supposed to do, you searched around."
-        "Then a thumping sound can be heard, and the area becomes dark."
-        "That's when you see it, a pair of red eyes in the distance of the forest staring right into your soul."
-        "You quickly take aim at it; however, the area thumps again, and the eyes are nowhere to be seen."
+        # "You wake up."
+        # "Looking around, it seems to be a forest."
+        # "Then, unintentionally, you grabbed something."
+        # "A hunter's rifle."
+        # "You checked the magazine for ammunition. There are only three bullets."
+        # "Looking around, you see only wildlife, deer, and birds chiming in the distance."
+        # "Not sure what you are supposed to do, you searched around."
+        # "Then a thumping sound can be heard, and the area becomes dark."
+        # "That's when you see it, a pair of red eyes in the distance of the forest staring right into your soul."
+        # "You quickly take aim at it; however, the area thumps again, and the eyes are nowhere to be seen."
     label door_4:
 
        
@@ -1090,6 +1040,11 @@ label start:
     return
 
     label end_of_demo:
+        hide Tablet
+        "You're barely able to stand, much less continue in this state."
+        "You found no living survivors no matter where you went."
+        "It's time you called your mission to an end, job complete."
+        "You lie down to rest, hoping that next time you open your eyes, it'll be somewhere better."
         "{b}THANK YOU FOR PLAYING{/b}"
 
 
@@ -1336,3 +1291,131 @@ label start:
 #         #"Looking out the window, you notice it is going to be night soon as the streetlights light a pathway towards the church which is incredibly well lit." This can just be shown with lighting the in background
 
 #         jump round_1
+
+    # label fw_End:
+    #     #This and fw_Death should be combined for the flavor text of fw_bad_ending
+    #     "You turn and sprint for the gate."
+    #     "Behind you, something moves—fast, wrong, closing the distance in bursts that don't match reality."
+    #     "Your boots slam against frozen pavement, slipping for half a step before catching again."
+    #     "Your HUD screams warnings—temperature collapse, signal distortion, unknown entity proximity—"
+    #     "You don't look back. The fallen gate is just ahead. Then—"
+    #     "A sound. Not a roar. Not a scream. A voice. Layered. Distorted. Familiar."
+
+    #     a4 "—don't leave—"
+    #     "Your stride falters."
+    #     "You risk a glance over your shoulder."
+    #     "Mist surges across the yard like a living tide. Inside it, shapes flicker—figures reaching, collapsing, reforming—Running with you."
+    #     "No—{i}being dragged{/i}."
+
+    #     "The temperature spikes downward again. Ice crawls up your legs, locking your joints mid-stride." #Maybe accompany with SFX
+    #     "You stumble, crash hard onto the frozen concrete."
+    #     "Your rifle skids away, disappearing into the mist."
+    #     "The gate is only a few feet ahead."
+    #     "You try to crawl. Your fingers don't respond."
+
+    #     "The voice comes again, clearer now. Closer."
+    #     a4 "—stay—"
+
+    #     "A shadow falls over you. The mist pulls back just enough for you to see it standing there—taller than before, broader, its surface rippling with frozen silhouettes."
+    #     "One of them turns toward you."
+    #     "Alpha-4"
+
+    #     "His arm lifts slowly, pointing—not at you—but past you."
+    #     "Back toward the warehouse."
+    #     "Your HUD flashes one final time." 
+    #     "{b}SIGNAL ACQUIRED: ALPHA TEAM (ALL){/b}"
+    #     "The cold consumes everything. Your vision fades to white."
+    #     "The last thing you feel is movement—Not being attacked. Not being killed. But being pulled."
+    #     "{b}Back inside{/b}"
+    #     jump fw_death
+    
+    # label fw_Fight:
+    #     "You steady your aim."
+    #     "The thing in the mist shifts—tall, jagged, its form breaking and reforming like ice cracking under pressure. 
+    #     Frost spreads outward from its limbs, crawling across the ground in branching veins."
+
+    #     #Ice Beast appears on screen
+    #     "Your visor flickers."
+    #     "{b}Temperature warning: critical.{/b}"
+    #     "You open fire."
+
+    #     "The shot echoes like a thunderclap in the frozen yard. The round strikes its torso—if it has one—but instead of blood, the impact blossoms into a burst of crystalline shards."
+    #     "It doesn't slow. It {i}learns{/i}."
+
+    #     "The creature lunges forward, movements unnatural, skipping frames like corrupted footage. One moment it stands at the loading dock—the next, it's halfway to you."
+    #     "Your rifle chatters, each shot fracturing pieces off it, but those pieces don't fall. They hover." #I guess have gunshot audio in the background
+    #     "Then snap back into place."
+
+    #     "Your HUD glitches harder now—signals spiking, Alpha-team signatures merging, overlapping—Becoming one." #I want to say this could be shown visually, but I doubt Jordan has time for that.
+    #     "The creature shrieks—a sound like metal screaming under stress—and the temperature plummets again."
+
+    #     "Your joints stiffen. Your breath stops fogging. You realize—"
+    #     "It's not getting colder. You're freezing."
+    #     "The creature reaches you."
+    #     "For a split second, you see through the ice forming across its surface—faces."
+        
+    #     #Reveal fused faces
+    #     "Alpha-4"
+    #     "Alpha-8"
+    #     "Alpha-10"
+    #     #"All fused beneath the frozen shell, eyes open, mouths moving silently."
+    #     "Your weapon locks up. So do your hands."
+    #     "The last thing your visor records is the entity leaning closer, its surface cracking open—"
+    #     "{b}Inviting you in.{/b}"
+    #     jump fw_death
+
+
+    # label fw_death:
+    #     "{b}You Died{/b}"
+
+    #     "Return to start of area?"
+    #     menu:
+    #         "yes":
+    #             jump frozen_warehouse
+    #         "no":
+    #             $ used_areas["frozen_warehouse"] = False
+    #             jump area_menu                
+
+
+    # # ─────────────────────────────────────────
+    # #  FLESH WALKER End
+    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)    
+    # # ─────────────────────────────────────────
+    # label aleintown_End:
+    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)        
+    #     #Scene changes to night time cornfield
+    #     "You can hear the creature catching up to you at a rapid speed."
+    #     "You pull out your pistol and put a couple of rounds down into the cornfield behind you to no avail."
+    #     "Continue sprinting, you can feel the exhaustion. You are running out of breath. With no bearings where you are. You slow down and start to listen."
+    #     # Only breath sounds
+
+    #     "Has the monster moved on? No. It's here."
+    #     #Footstep audio
+    #     "You suddenly hear footsteps from {b}behind{/b}."
+    #     "You turn and fire your rifle, emptying the magazine." #Insert 30 seconds of nonstop full auto until a click sound.
+
+    #     mc "Shit!"
+    #     "You're out of ammo."
+
+    #     "You here it next to you, breathing down your neck and before you can react you can only hear the crunch of your ribs."
+
+    #     "You escape into a house and barricade all the doors."
+    #     "You turn a table over and point your rifle at the only entrance to the house."
+    #     "You can hear it rounding the house, as if cornering its prey." #Not sure how the audio is going to go
+    #     "You grip the rifle tight in your hand trying to not recall what had happened to Alpha 7."
+    #     "Then the rounding sound stopped, and the only sound you can hear is the sound of your own breath." #Play appropriate audio
+    #     fw "...I'm inside now. Walls feel closer. Something's moving under the floor. I think it knows I'm here."
+    #     "Before you can react, a pair of sharp claws impales your chest and dragged you though the window."
+    #     "You swore was a wall when you barricaded yourself in."
+    #     # this text should be moved from this unused label into one of the currently used on (during the rounds of alien town)
+    #     jump at_bad_ending
+
+    # ─────────────────────────────────────────
+    #  FLESH WALKER MINIGAME — minigame.rpy
+    # ─────────────────────────────────────────
+    # label flesh_Walker_Boss:
+    #     call flesh_walker_minigame
+    #     if fw_health > 0:
+    #         "You made it through."
+    #     else:
+    #         jump death
