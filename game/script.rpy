@@ -72,7 +72,7 @@ image bg FrozenWarehouse = im.Scale("bg FrozenWarehouse.png", 1920, 1080)
 
 image Tablet = im.Scale("bg Tablet-2.png", 1920, 1080)
 image Fleshwalker = im.Scale("Fleshwalker-2.png", 1920, 1080)
-image Ice-Wolf = im.Scale("icewolf.png", 1920, 1080)
+image FrozenBeast = im.Scale("frozen_beast.png", 1920, 1080)
 image Sand-Worm = im.Scale("sandworm.png", 1920, 1080)
 image Door1_Sign = im.Scale("door_1_sign.png", 1920, 1080)
 image Door2_Sign = im.Scale("door_2_sign.png", 1920, 1080)
@@ -481,6 +481,7 @@ label start:
         "Turning around, you see it, what was mentioned in the audio log, awoken by the sound."
 
         #Reveal Ice Boss
+        show FrozenBeast
         "You raise your weapon."
         jump fw_menu
 
@@ -773,6 +774,9 @@ label start:
         "The rumble grows louder. Closer"
         "The red marker blinks violently — then disappears."
         "The ground {b}erupts.{/b}"
+        
+        show Sand-Worm
+        
         "A massive Sandworm bursts through the street in an explosion of sand, concrete, and shattered rebar."
         "Its armored hide glistens in the sun. Its maw opens wide, lined with spiraling rings of teeth."
         "The shockwave knocks you backward."
