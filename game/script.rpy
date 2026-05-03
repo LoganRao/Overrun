@@ -71,6 +71,8 @@ image bg FrozenWarehouse = im.Scale("bg FrozenWarehouse.png", 1920, 1080)
 
 image Tablet = im.Scale("bg Tablet-2.png", 1920, 1080)
 image Fleshwalker = im.Scale("Fleshwalker-2.png", 1920, 1080)
+image Ice-Wolf = im.Scale("icewolf.png", 1920, 1080)
+image Sand-Worm = im.Scale("sandworm.png", 1920, 1080)
 
 # The game starts here.
 
@@ -866,10 +868,37 @@ label start:
     #  Alien Amusement-Park
     # ─────────────────────────────────────────
     label alien_amusement_park:
+        "As you walk down the urban area, the last location of Alpha 9’s tracker flickers on your tablet. "
+        "Suddenly, the weather changed dramatically; it seemed a hurricane was crashing down upon this side of the city. Every step you take forward feels more difficult than the last, until you eventually lose balance and are picked up into the air. "
+        "Within the hurricane, you struggle to keep your balance while trying to make sure nothing is lost, until you see a light centered in the eye of the hurricane."
+        "It is taking you closer and closer as if the wind is forcefully taking you into the center. You turned and immediately grabbed onto something."
+        "However, something suddenly breaks, and you are launched into the eye of the hurricane."
 
+        "As you wake up with a gasp, you study the surroundings around you, and what was in front surprised you to the core."
+        mc "Is that an...amusement park?"
+
+        "You stand up, pad yourself down, and slowly walked closer to the entrance. "
+        "Warning: operator field symbols detected."
+
+        "Warning: operator field symbols detected."
+        show Tablet
+
+        "Within an emergency situation, recon members may leave specific field symbols for other members in case they will be entering a large area without an audio record or if the record is ineffective."
+        "Operatives are to be extremely careful in the event that they do encounter these symbols, as the circumstances of their usage often mean a deadly environment."
+        "You looked around the entrance and found a field symbol."
+
+        "Knowing the risk, you first surveyed the area around the entrance to no use; the wall of the entrance gate stretched across infinite distances. As in fact someone or something is giving you an undefiable urge to immediately enter the park"
+        "Without hesitation, you quickly opened the gate and entered the park."
+
+        "After entering the park, you noted there really isn't a park, but one specific building in front of you"
+        "Walking around the building proved to be useless, as somehow you always manage to route back to the entrance of that building."
+        "Guess there is no other choice. You entered the building."
+        "After entering the building, there are 4 doors present in front of you."
+        "Then, suddenly, a black shadow figure appeared from your body. The shadow slowly walked towards the first door and made a gesture, opening the door and facing through the door."
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
+    
     label secret_outpost:
         if star_count == 0:
             jump so_0
