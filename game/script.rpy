@@ -878,6 +878,7 @@ label start:
         "Within an emergency situation, recon members may leave specific field symbols for other members in case they will be entering a large area without an audio record or if the record is ineffective."
         "Operatives are to be extremely careful in the event that they do encounter these symbols, as the circumstances of their usage often mean a deadly environment."
         "You looked around the entrance and found a field symbol."
+        #I'm not sure what symbol to put here
 
         "Knowing the risk, you first surveyed the area around the entrance to no use; the wall of the entrance gate stretched across infinite distances. As in fact someone or something is giving you an undefiable urge to immediately enter the park"
         "Without hesitation, you quickly opened the gate and entered the park."
@@ -898,7 +899,7 @@ label start:
             "Door 4":
                 jump door_4
 
-        
+
     # ─────────────────────────────────────────
     #  Secret Area
     # ─────────────────────────────────────────
