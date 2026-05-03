@@ -941,7 +941,8 @@ label start:
         label runner:
             "You slowly traversed through the surroundings and are slowly moving towards the door."
             "Suddenly, something knocked the flashlight out of your hand. You scrambled to find the flashlight."
-            "Hey! No running away!"
+            lg "Hey! No running away!"
+            jump door_2
     
     label door_2:
         "Entering through the door, darkness."
